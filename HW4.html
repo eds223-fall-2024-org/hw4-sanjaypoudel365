@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Sanjay Poudel">
+
+<title>HW4</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="HW4_files/libs/clipboard/clipboard.min.js"></script>
+<script src="HW4_files/libs/quarto-html/quarto.js"></script>
+<script src="HW4_files/libs/quarto-html/popper.min.js"></script>
+<script src="HW4_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="HW4_files/libs/quarto-html/anchor.min.js"></script>
+<link href="HW4_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="HW4_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="HW4_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="HW4_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="HW4_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="HW4_files/libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="HW4_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="HW4_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="HW4_files/libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="HW4_files/libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="HW4_files/libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="HW4_files/libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="HW4_files/libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="HW4_files/libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="HW4_files/libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="HW4_files/libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="HW4_files/libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+<script src="HW4_files/libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="HW4_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">HW4</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Sanjay Poudel </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="load-required-libraries-and-files" class="level3">
+<h3 class="anchored" data-anchor-id="load-required-libraries-and-files">Load Required Libraries and Files</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"here"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>here() starts at /Users/sp365/Documents/EDS 223/HW/hw4-sanjaypoudel365</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"terra"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>terra 1.7.78</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to GEOS 3.11.0, GDAL 3.5.3, PROJ 9.1.0; sf_use_s2() is TRUE</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tmap"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Breaking News: tmap 3.x is retiring. Please test v4, e.g. with
+remotes::install_github('r-tmap/tmap')</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"kableExtra"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:kableExtra':
+
+    group_rows</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:terra':
+
+    intersect, union</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#load required files</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>filepath <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">rast</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"depth.tif"</span>))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>eec <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data"</span>,<span class="st">"wc_regions_clean.shp"</span>))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>sst_files <span class="ot">&lt;-</span> <span class="fu">list.files</span>(filepath, <span class="at">pattern =</span> <span class="st">"annual.*</span><span class="sc">\\</span><span class="st">.tif$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>sst <span class="ot">&lt;-</span> <span class="fu">rast</span>(sst_files)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="data-preprocessing">Data Preprocessing</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the crs compatibility of depth and crs files and change if needed</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">st_crs</span>(depth) <span class="sc">==</span> <span class="fu">st_crs</span>(eec)) {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"depth and eec files have the same coordinate system"</span>)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    eec <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(eec, <span class="at">crs =</span> <span class="fu">st_crs</span>(depth))</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "depth and eec files have the same coordinate system"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the crs compatibility of depth and sst files and change if needed</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">crs</span>(depth) <span class="sc">==</span> <span class="fu">crs</span>(sst)) {</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"depth and sst rasters have the save coordinate system"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Changing the CRS of sst file"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    sst <span class="ot">&lt;-</span> <span class="fu">project</span>(sst, <span class="fu">crs</span>(depth))</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Changing the CRS of sst file</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#caclulate the average sst in celsius</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>avg_sst <span class="ot">&lt;-</span> <span class="fu">mean</span>(sst) <span class="sc">-</span> <span class="fl">273.15</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the name of the raster</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(avg_sst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "mean"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#rename the raster</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(avg_sst) <span class="ot">&lt;-</span> <span class="st">"avg_sst"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the extent of the depth and avg_sst raster</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ext</span>(depth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SpatExtent : -132, -114, 29, 50 (xmin, xmax, ymin, ymax)</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">ext</span>(avg_sst))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>SpatExtent : -131.98475233, -114.987860801091, 29.9920799888132, 49.988422964 (xmin, xmax, ymin, ymax)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#crop the depth raster to match the extent of the avg_sst raster</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">crop</span>(depth, avg_sst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the resolution of the depth and avg_sst raster</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">res</span>(depth))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.004166667 0.004166667</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">res</span>(avg_sst))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.04165905 0.04165905</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#resample the depth raster to match the resolution of the avg_sst raster</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>depth <span class="ot">&lt;-</span> <span class="fu">resample</span>(depth, avg_sst, <span class="at">method =</span> <span class="st">"near"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check if the depth and avg_sst rasters have matching extent and resolution by combining them</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>combined_rast <span class="ot">=</span> <span class="fu">c</span>(depth, avg_sst)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Rasterize the eec shp file</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>eec_vect <span class="ot">&lt;-</span> <span class="fu">vect</span>(eec)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>eec_raster <span class="ot">&lt;-</span> <span class="fu">rasterize</span>(eec_vect, depth, <span class="at">field =</span> <span class="st">"rgn_id"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the result to confirm</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(eec_raster, <span class="at">main =</span> <span class="st">"Rasterized EEC"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HW4_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="suitability-analysis-for-oysters" class="level3">
+<h3 class="anchored" data-anchor-id="suitability-analysis-for-oysters">Suitability Analysis for Oysters</h3>
+<p>Suitable Conditions:<br>
+Temperature Range: 11 to 30 degree Celsius<br>
+Depth Range: 0 to 70 mbsl</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reclassify SST and Depth for oyster suitability</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>sst_oyster <span class="ot">&lt;-</span> <span class="fu">classify</span>(avg_sst, <span class="at">rcl =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="dv">11</span>, <span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">30</span>, <span class="dv">1</span>, <span class="dv">30</span>, <span class="cn">Inf</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>depth_oyster <span class="ot">&lt;-</span> <span class="fu">classify</span>(depth, <span class="at">rcl =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span><span class="dv">70</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">70</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="cn">Inf</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the layers to create a suitability map</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>suitability_oyster <span class="ot">&lt;-</span> sst_oyster <span class="sc">*</span> depth_oyster</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(suitability_oyster, <span class="at">main =</span> <span class="st">"Suitability Map for Oysters"</span>) <span class="co"># Plot for visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HW4_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign regions to suitable areas using EEC raster</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>oyster_regions <span class="ot">&lt;-</span> suitability_oyster <span class="sc">*</span> eec_raster</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(oyster_regions, <span class="at">main =</span> <span class="st">"Suitable Areas for Oysters by Region ID"</span>) <span class="co"># Plot for visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HW4_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert raster to polygons</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>oyster_regions_vec <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(oyster_regions) <span class="sc">%&gt;%</span> <span class="fu">st_as_sf</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To remove the polygons representing water and add columns with names of the regions</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>region_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Oregon"</span>, <span class="st">"Northern California"</span>, <span class="st">"Central California"</span>, <span class="st">"Southern California"</span>, <span class="st">"Washington"</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>oyster_regions_vec <span class="ot">&lt;-</span> oyster_regions_vec <span class="sc">%&gt;%</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(avg_sst <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> region_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the map</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"view"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>tmap mode set to interactive viewing</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(oyster_regions_vec)<span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"region"</span>,</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"EEZ"</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Suitable Areas for Oyster Farming along the West Coast of the USA by EEZ"</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">view.legend.position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-ef3328bafbaf3a45e0c5" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-ef3328bafbaf3a45e0c5">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"createMapPane","args":["tmap401",401]},{"method":"addProviderTiles","args":["Esri.WorldGrayCanvas",null,"Esri.WorldGrayCanvas",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap",null,"OpenStreetMap",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldTopoMap",null,"Esri.WorldTopoMap",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addPolygons","args":[[[[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[46.23910865615247,46.1974496082875,46.1974496082875,46.23910865615247,46.23910865615247]}],[{"lng":[-123.9445560920603,-123.9445560920603,-123.8195789484654,-123.8195789484654,-123.9445560920603],"lat":[46.23910865615247,46.1974496082875,46.1974496082875,46.23910865615247,46.23910865615247]}],[{"lng":[-123.7779199006004,-123.7779199006004,-123.6946018048705,-123.6946018048705,-123.7779199006004],"lat":[46.23910865615247,46.1974496082875,46.1974496082875,46.23910865615247,46.23910865615247]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0278741877902],"lat":[46.1974496082875,46.15579056042253,46.15579056042253,46.1974496082875,46.1974496082875]}],[{"lng":[-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-124.0278741877902,-124.0278741877902,-124.0695332356552,-124.0695332356552,-124.1111922835202,-124.1111922835202,-124.2361694271151],"lat":[46.23910865615247,46.1974496082875,46.1974496082875,46.11413151255756,46.11413151255756,46.07247246469258,46.07247246469258,45.98915436896264,45.98915436896264,45.90583627323269,45.90583627323269,45.94749532109767,45.94749532109767,45.98915436896264,45.98915436896264,46.03081341682761,46.03081341682761,46.07247246469258,46.07247246469258,46.1974496082875,46.1974496082875,46.23910865615247,46.23910865615247]}],[{"lng":[-123.9862151399253,-123.9445560920603,-123.9445560920603,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253],"lat":[46.15579056042253,46.15579056042253,46.07247246469258,46.07247246469258,46.11413151255756,46.11413151255756,46.15579056042253]}],[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[45.82251817750275,45.78085912963778,45.78085912963778,45.82251817750275,45.82251817750275]}],[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[45.65588198604286,45.61422293817789,45.61422293817789,45.65588198604286,45.65588198604286]}],[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[45.53090484244794,45.48924579458297,45.48924579458297,45.53090484244794,45.53090484244794]}],[{"lng":[-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902],"lat":[45.447586746718,45.447586746718,45.36426865098805,45.36426865098805,45.40592769885303,45.40592769885303,45.447586746718]}],[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[45.28095055525811,45.23929150739313,45.23929150739313,45.28095055525811,45.28095055525811]}],[{"lng":[-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552],"lat":[45.15597341166319,45.15597341166319,45.03099626806827,45.03099626806827,45.07265531593325,45.07265531593325,45.15597341166319]}],[{"lng":[-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151],"lat":[44.78104198087843,44.69772388514849,44.69772388514849,44.78104198087843,44.78104198087843]}],[{"lng":[-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202],"lat":[44.78104198087843,44.73938293301347,44.73938293301347,44.78104198087843,44.78104198087843]}],[{"lng":[-124.44446466644,-124.44446466644,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.44446466644],"lat":[44.61440578941855,44.44776959795865,44.44776959795865,44.5310876936886,44.5310876936886,44.61440578941855,44.61440578941855]}],[{"lng":[-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.2778284749801],"lat":[44.61440578941855,44.57274674155357,44.57274674155357,44.61440578941855,44.61440578941855]}],[{"lng":[-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.2778284749801],"lat":[44.48942864582363,44.44776959795865,44.44776959795865,44.48942864582363,44.48942864582363]}],[{"lng":[-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1945103792501,-124.1945103792501,-124.3194875228451],"lat":[44.40611055009369,44.28113340649877,44.28113340649877,44.23947435863379,44.23947435863379,44.28113340649877,44.28113340649877,44.32279245436374,44.32279245436374,44.28113340649877,44.28113340649877,44.36445150222871,44.36445150222871,44.40611055009369,44.40611055009369]}],[{"lng":[-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.2778284749801],"lat":[44.15615626290385,44.11449721503887,44.11449721503887,44.15615626290385,44.15615626290385]}],[{"lng":[-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501],"lat":[43.98952007144396,43.94786102357899,43.94786102357899,43.98952007144396,43.98952007144396]}]],[[{"lng":[-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.2778284749801],"lat":[41.86490863033036,41.82324958246539,41.82324958246539,41.86490863033036,41.86490863033036]}],[{"lng":[-124.2778284749801,-124.2778284749801,-124.1945103792501,-124.1945103792501,-124.2778284749801],"lat":[41.44831815168064,41.40665910381566,41.40665910381566,41.44831815168064,41.44831815168064]}],[{"lng":[-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852],"lat":[41.32334100808572,41.28168196022074,41.28168196022074,41.32334100808572,41.32334100808572]}],[{"lng":[-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151],"lat":[41.24002291235577,41.1983638644908,41.1983638644908,41.24002291235577,41.24002291235577]}],[{"lng":[-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852],"lat":[41.1983638644908,41.15670481662583,41.15670481662583,41.1983638644908,41.1983638644908]}],[{"lng":[-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501],"lat":[41.07338672089588,41.03172767303091,41.03172767303091,41.07338672089588,41.07338672089588]}],[{"lng":[-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151],"lat":[40.906750529436,40.86509148157102,40.86509148157102,40.906750529436,40.906750529436]}],[{"lng":[-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.2778284749801],"lat":[40.78177338584108,40.7401143379761,40.7401143379761,40.78177338584108,40.78177338584108]}],[{"lng":[-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451],"lat":[40.69845529011113,40.65679624224616,40.65679624224616,40.69845529011113,40.69845529011113]}],[{"lng":[-124.36114657071,-124.36114657071,-124.3194875228451,-124.3194875228451,-124.36114657071],"lat":[40.65679624224616,40.61513719438118,40.61513719438118,40.65679624224616,40.65679624224616]}]],[[{"lng":[-123.0280570390309,-123.0280570390309,-122.944738943301,-122.944738943301,-123.0280570390309],"lat":[38.1572533703478,38.11559432248283,38.11559432248283,38.1572533703478,38.1572533703478]}],[{"lng":[-123.4446475176806,-123.4446475176806,-123.4029884698157,-123.4029884698157,-123.4446475176806],"lat":[38.07393527461786,37.99061717888792,37.99061717888792,38.07393527461786,38.07393527461786]}],[{"lng":[-122.4448303689213,-122.3615122731913,-122.3615122731913,-122.3198532253264,-122.3198532253264,-122.4864894167863,-122.4864894167863,-122.4448303689213,-122.4448303689213],"lat":[38.11559432248283,38.11559432248283,38.07393527461786,38.07393527461786,38.03227622675288,38.03227622675288,38.07393527461786,38.07393527461786,38.11559432248283]}],[{"lng":[-122.3615122731913,-122.3615122731913,-122.3198532253264,-122.3198532253264,-122.3615122731913],"lat":[37.865640035293,37.82398098742802,37.82398098742802,37.865640035293,37.865640035293]}],[{"lng":[-123.1946932304908,-123.1946932304908,-123.1530341826258,-123.1530341826258,-123.1946932304908],"lat":[37.82398098742802,37.78232193956305,37.78232193956305,37.82398098742802,37.82398098742802]}],[{"lng":[-122.3615122731913,-122.3615122731913,-122.3198532253264,-122.3198532253264,-122.1948760817315,-122.1948760817315,-122.3198532253264,-122.3198532253264,-122.3615122731913],"lat":[37.74066289169808,37.65734479596814,37.65734479596814,37.61568574810316,37.61568574810316,37.69900384383311,37.69900384383311,37.74066289169808,37.74066289169808]}],[{"lng":[-123.1113751347608,-123.0280570390309,-123.0280570390309,-123.0697160868959,-123.0697160868959,-123.0280570390309,-123.0280570390309,-122.944738943301,-122.944738943301,-122.861420847571,-122.861420847571,-122.7781027518411,-122.7781027518411,-122.7364437039761,-122.7364437039761,-122.6531256082461,-122.6531256082461,-122.5698075125162,-122.5698075125162,-122.4864894167863,-122.4864894167863,-122.5281484646512,-122.5281484646512,-122.5698075125162,-122.5698075125162,-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213,-122.4448303689213,-122.4864894167863,-122.4864894167863,-122.5281484646512,-122.5281484646512,-122.6114665603812,-122.6114665603812,-122.6531256082461,-122.6531256082461,-122.6947846561111,-122.6947846561111,-122.7364437039761,-122.7364437039761,-122.7781027518411,-122.7781027518411,-122.819761799706,-122.819761799706,-122.861420847571,-122.861420847571,-123.0280570390309,-123.0280570390309,-123.0697160868959,-123.0697160868959,-123.1530341826258,-123.1530341826258,-123.0280570390309,-123.0280570390309,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-123.0697160868959,-123.0697160868959,-123.1113751347608,-123.1113751347608],"lat":[38.11559432248283,38.11559432248283,38.07393527461786,38.07393527461786,38.03227622675288,38.03227622675288,37.99061717888792,37.99061717888792,38.03227622675288,38.03227622675288,37.99061717888792,37.99061717888792,37.94895813102294,37.94895813102294,37.90729908315797,37.90729908315797,37.865640035293,37.865640035293,37.82398098742802,37.82398098742802,37.78232193956305,37.78232193956305,37.57402670023819,37.57402670023819,37.49070860450824,37.49070860450824,37.32407241304836,37.32407241304836,37.28241336518338,37.28241336518338,37.15743622158847,37.15743622158847,37.24075431731841,37.24075431731841,37.32407241304836,37.32407241304836,37.4073905087783,37.4073905087783,37.44904955664327,37.44904955664327,37.49070860450824,37.49070860450824,37.53236765237322,37.53236765237322,37.57402670023819,37.57402670023819,37.61568574810316,37.61568574810316,37.65734479596814,37.65734479596814,37.69900384383311,37.69900384383311,37.74066289169808,37.74066289169808,37.78232193956305,37.78232193956305,37.82398098742802,37.82398098742802,37.865640035293,37.865640035293,37.90729908315797,37.90729908315797,37.99061717888792,37.99061717888792,38.11559432248283]}],[{"lng":[-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213],"lat":[37.15743622158847,37.11577717372349,37.11577717372349,37.15743622158847,37.15743622158847]}],[{"lng":[-122.4031713210563,-122.4031713210563,-122.3615122731913,-122.3615122731913,-122.3198532253264,-122.3198532253264,-122.2365351295964,-122.2365351295964,-122.1532170338665,-122.1532170338665,-122.1948760817315,-122.1948760817315,-122.2781941774614,-122.2781941774614,-122.4031713210563],"lat":[37.11577717372349,37.07411812585852,37.07411812585852,37.03245907799355,37.03245907799355,36.99080003012858,36.99080003012858,36.9491409822636,36.9491409822636,36.99080003012858,36.99080003012858,37.03245907799355,37.03245907799355,37.11577717372349,37.11577717372349]}],[{"lng":[-122.1532170338665,-122.1532170338665,-122.0698989381365,-122.0698989381365,-121.9032627466766,-121.9032627466766,-121.8199446509467,-121.8199446509467,-121.8616036988117,-121.8616036988117,-122.1532170338665],"lat":[36.9491409822636,36.90748193439863,36.90748193439863,36.86582288653366,36.86582288653366,36.82416383866868,36.82416383866868,36.86582288653366,36.86582288653366,36.9491409822636,36.9491409822636]}],[{"lng":[-121.8616036988117,-121.8616036988117,-121.8199446509467,-121.8199446509467,-121.8616036988117],"lat":[36.78250479080371,36.74084574293874,36.74084574293874,36.78250479080371,36.78250479080371]}],[{"lng":[-121.8616036988117,-121.8616036988117,-121.8199446509467,-121.8199446509467,-121.8616036988117],"lat":[36.69918669507376,36.65752764720879,36.65752764720879,36.69918669507376,36.69918669507376]}],[{"lng":[-121.9865808424066,-121.9865808424066,-121.9032627466766,-121.9032627466766,-121.9865808424066],"lat":[36.65752764720879,36.61586859934382,36.61586859934382,36.65752764720879,36.65752764720879]}],[{"lng":[-121.9865808424066,-121.9865808424066,-121.9449217945416,-121.9449217945416,-121.9865808424066],"lat":[36.57420955147885,36.49089145574891,36.49089145574891,36.57420955147885,36.57420955147885]}],[{"lng":[-121.9449217945416,-121.9449217945416,-121.9032627466766,-121.9032627466766,-121.9449217945416],"lat":[36.36591431215399,36.28259621642404,36.28259621642404,36.36591431215399,36.36591431215399]}],[{"lng":[-121.9865808424066,-121.9865808424066,-121.9449217945416,-121.9449217945416,-121.9865808424066],"lat":[36.28259621642404,36.24093716855907,36.24093716855907,36.28259621642404,36.28259621642404]}],[{"lng":[-121.9032627466766,-121.9032627466766,-121.8616036988117,-121.8616036988117,-121.9032627466766],"lat":[36.28259621642404,36.24093716855907,36.24093716855907,36.28259621642404,36.28259621642404]}],[{"lng":[-121.8199446509467,-121.8199446509467,-121.7782856030817,-121.7782856030817,-121.8199446509467],"lat":[36.24093716855907,36.1992781206941,36.1992781206941,36.24093716855907,36.24093716855907]}],[{"lng":[-121.6949675073518,-121.6949675073518,-121.6533084594868,-121.6533084594868,-121.6949675073518],"lat":[36.15761907282912,36.11596002496415,36.11596002496415,36.15761907282912,36.15761907282912]}],[{"lng":[-121.6116494116218,-121.6116494116218,-121.5699903637569,-121.5699903637569,-121.6116494116218],"lat":[36.0326419292342,35.99098288136923,35.99098288136923,36.0326419292342,36.0326419292342]}],[{"lng":[-121.5283313158919,-121.5283313158919,-121.4866722680269,-121.4866722680269,-121.5283313158919],"lat":[35.99098288136923,35.94932383350426,35.94932383350426,35.99098288136923,35.99098288136923]}],[{"lng":[-121.4450132201619,-121.4450132201619,-121.403354172297,-121.403354172297,-121.4450132201619],"lat":[35.86600573777432,35.82434668990935,35.82434668990935,35.86600573777432,35.86600573777432]}],[{"lng":[-121.403354172297,-121.403354172297,-121.361695124432,-121.361695124432,-121.2783770287021,-121.2783770287021,-121.320036076567,-121.320036076567,-121.361695124432,-121.361695124432,-121.403354172297],"lat":[35.82434668990935,35.7410285941794,35.7410285941794,35.65771049844945,35.65771049844945,35.69936954631443,35.69936954631443,35.78268764204437,35.78268764204437,35.82434668990935,35.82434668990935]}],[{"lng":[-121.2783770287021,-121.2783770287021,-121.1950589329721,-121.1950589329721,-121.2783770287021],"lat":[35.65771049844945,35.61605145058448,35.61605145058448,35.65771049844945,35.65771049844945]}],[{"lng":[-121.1533998851071,-121.1533998851071,-121.1117408372422,-121.1117408372422,-121.1533998851071],"lat":[35.57439240271951,35.53273335485454,35.53273335485454,35.57439240271951,35.57439240271951]}],[{"lng":[-121.1117408372422,-121.1117408372422,-121.0700817893772,-121.0700817893772,-121.1117408372422],"lat":[35.53273335485454,35.49107430698956,35.49107430698956,35.53273335485454,35.53273335485454]}],[{"lng":[-121.0700817893772,-121.0700817893772,-121.0284227415122,-121.0284227415122,-121.0700817893772],"lat":[35.49107430698956,35.44941525912459,35.44941525912459,35.49107430698956,35.49107430698956]}],[{"lng":[-120.9867636936472,-120.9867636936472,-120.9451046457823,-120.9451046457823,-120.9034455979173,-120.9034455979173,-120.8617865500523,-120.8617865500523,-120.9034455979173,-120.9034455979173,-120.9867636936472],"lat":[35.44941525912459,35.40775621125962,35.40775621125962,35.24112001979973,35.24112001979973,35.28277906766471,35.28277906766471,35.32443811552967,35.32443811552967,35.44941525912459,35.44941525912459]}],[{"lng":[-120.9034455979173,-120.9034455979173,-120.8617865500523,-120.8617865500523,-120.9034455979173],"lat":[35.24112001979973,35.19946097193476,35.19946097193476,35.24112001979973,35.24112001979973]}],[{"lng":[-120.8617865500523,-120.8617865500523,-120.8201275021874,-120.8201275021874,-120.7784684543224,-120.7784684543224,-120.6534913107275,-120.6534913107275,-120.6951503585924,-120.6951503585924,-120.7784684543224,-120.7784684543224,-120.8617865500523],"lat":[35.19946097193476,35.15780192406979,35.15780192406979,35.11614287620481,35.11614287620481,34.94950668474492,34.94950668474492,35.11614287620481,35.11614287620481,35.15780192406979,35.15780192406979,35.19946097193476,35.19946097193476]}]],[[{"lng":[-120.7368094064574,-120.7368094064574,-120.6951503585924,-120.6951503585924,-120.6118322628625,-120.6118322628625,-120.6534913107275,-120.6534913107275,-120.6118322628625,-120.6118322628625,-120.6534913107275,-120.6534913107275,-120.6118322628625,-120.6118322628625,-120.6534913107275,-120.6534913107275,-120.6951503585924,-120.6951503585924,-120.7368094064574],"lat":[34.94950668474492,34.57457525396017,34.57457525396017,34.53291620609519,34.53291620609519,34.57457525396017,34.57457525396017,34.61623430182514,34.61623430182514,34.65789334969011,34.65789334969011,34.78287049328503,34.78287049328503,34.86618858901497,34.86618858901497,34.90784763687995,34.90784763687995,34.94950668474492,34.94950668474492]}],[{"lng":[-120.6118322628625,-120.6118322628625,-120.5285141671326,-120.5285141671326,-120.4868551192676,-120.4868551192676,-120.6118322628625],"lat":[34.53291620609519,34.49125715823023,34.49125715823023,34.44959811036525,34.44959811036525,34.53291620609519,34.53291620609519]}],[{"lng":[-120.4451960714026,-120.4451960714026,-120.3202189278077,-120.3202189278077,-120.4451960714026],"lat":[34.44959811036525,34.40793906250028,34.40793906250028,34.44959811036525,34.44959811036525]}],[{"lng":[-120.1535827363478,-120.1535827363478,-119.9452874970229,-119.9452874970229,-120.1535827363478],"lat":[34.44959811036525,34.40793906250028,34.40793906250028,34.44959811036525,34.44959811036525]}],[{"lng":[-119.903628449158,-119.903628449158,-119.6953332098331,-119.6953332098331,-119.5286970183732,-119.5286970183732,-119.4870379705082,-119.4870379705082,-119.4037198747783,-119.4037198747783,-119.3204017790484,-119.3204017790484,-119.2787427311834,-119.2787427311834,-119.1121065397235,-119.1121065397235,-119.1954246354534,-119.1954246354534,-119.2787427311834,-119.2787427311834,-119.3620608269133,-119.3620608269133,-119.4453789226433,-119.4453789226433,-119.5286970183732,-119.5286970183732,-119.903628449158],"lat":[34.40793906250028,34.36628001463531,34.36628001463531,34.32462096677033,34.32462096677033,34.28296191890536,34.28296191890536,34.19964382317541,34.19964382317541,34.15798477531044,34.15798477531044,34.11632572744547,34.11632572744547,34.0746666795805,34.0746666795805,34.11632572744547,34.11632572744547,34.15798477531044,34.15798477531044,34.28296191890536,34.28296191890536,34.32462096677033,34.32462096677033,34.36628001463531,34.36628001463531,34.40793906250028,34.40793906250028]}],[{"lng":[-120.5285141671326,-120.5285141671326,-120.4868551192676,-120.4868551192676,-120.4451960714026,-120.4451960714026,-120.3618779756727,-120.3618779756727,-120.5285141671326],"lat":[34.11632572744547,34.0746666795805,34.0746666795805,34.03300763171553,34.03300763171553,34.0746666795805,34.0746666795805,34.11632572744547,34.11632572744547]}],[{"lng":[-119.7369922576981,-119.7369922576981,-119.6953332098331,-119.6953332098331,-119.7369922576981],"lat":[34.0746666795805,34.03300763171553,34.03300763171553,34.0746666795805,34.0746666795805]}],[{"lng":[-119.5703560662382,-119.5703560662382,-119.5286970183732,-119.5286970183732,-119.5703560662382],"lat":[34.0746666795805,34.03300763171553,34.03300763171553,34.0746666795805,34.0746666795805]}],[{"lng":[-119.0287884439935,-119.0287884439935,-118.9871293961286,-118.9871293961286,-119.0287884439935],"lat":[34.0746666795805,34.03300763171553,34.03300763171553,34.0746666795805,34.0746666795805]}],[{"lng":[-120.4451960714026,-120.4451960714026,-120.3618779756727,-120.3618779756727,-120.4451960714026],"lat":[34.03300763171553,33.99134858385055,33.99134858385055,34.03300763171553,34.03300763171553]}],[{"lng":[-119.5286970183732,-119.5286970183732,-119.4453789226433,-119.4453789226433,-119.5286970183732],"lat":[34.03300763171553,33.99134858385055,33.99134858385055,34.03300763171553,34.03300763171553]}],[{"lng":[-119.3620608269133,-119.3620608269133,-119.3204017790484,-119.3204017790484,-119.3620608269133],"lat":[34.03300763171553,33.99134858385055,33.99134858385055,34.03300763171553,34.03300763171553]}],[{"lng":[-118.9038113003986,-118.9038113003986,-118.8204932046687,-118.8204932046687,-118.9038113003986],"lat":[34.03300763171553,33.99134858385055,33.99134858385055,34.03300763171553,34.03300763171553]}],[{"lng":[-120.2785598799427,-120.2785598799427,-120.2369008320777,-120.2369008320777,-120.2785598799427],"lat":[33.99134858385055,33.94968953598558,33.94968953598558,33.99134858385055,33.99134858385055]}],[{"lng":[-119.6536741619681,-119.6536741619681,-119.6120151141032,-119.6120151141032,-119.6536741619681],"lat":[33.99134858385055,33.94968953598558,33.94968953598558,33.99134858385055,33.99134858385055]}],[{"lng":[-120.2369008320777,-120.2369008320777,-120.1952417842128,-120.1952417842128,-120.2369008320777],"lat":[33.94968953598558,33.90803048812061,33.90803048812061,33.94968953598558,33.94968953598558]}],[{"lng":[-120.3618779756727,-120.3618779756727,-120.3202189278077,-120.3202189278077,-120.2785598799427,-120.2785598799427,-120.0286055927529,-120.0286055927529,-119.9869465448879,-119.9869465448879,-120.1119236884828,-120.1119236884828,-119.9452874970229,-119.9452874970229,-119.903628449158,-119.903628449158,-120.3618779756727],"lat":[34.0746666795805,34.03300763171553,34.03300763171553,33.99134858385055,33.99134858385055,34.03300763171553,34.03300763171553,33.99134858385055,33.99134858385055,33.90803048812061,33.90803048812061,33.86637144025563,33.86637144025563,34.03300763171553,34.03300763171553,34.0746666795805,34.0746666795805]}],[{"lng":[-118.7788341568037,-118.5288798696139,-118.5288798696139,-118.4872208217489,-118.4872208217489,-118.4455617738839,-118.4455617738839,-118.403902726019,-118.403902726019,-118.5705389174788,-118.5705389174788,-118.5288798696139,-118.5288798696139,-118.5705389174788,-118.5705389174788,-118.7788341568037,-118.7788341568037],"lat":[34.03300763171553,34.03300763171553,33.99134858385055,33.99134858385055,33.94968953598558,33.94968953598558,33.90803048812061,33.90803048812061,33.86637144025563,33.86637144025563,33.90803048812061,33.90803048812061,33.94968953598558,33.94968953598558,33.99134858385055,33.99134858385055,34.03300763171553]}],[{"lng":[-118.4455617738839,-118.4455617738839,-118.403902726019,-118.403902726019,-118.4455617738839],"lat":[33.78305334452569,33.74139429666072,33.74139429666072,33.78305334452569,33.78305334452569]}],[{"lng":[-118.2372665345591,-118.0706303430992,-118.0706303430992,-117.9873122473692,-117.9873122473692,-117.9039941516393,-117.9039941516393,-118.0706303430992,-118.0706303430992,-118.1122893909641,-118.1122893909641,-118.2372665345591,-118.2372665345591,-118.320584630289,-118.320584630289,-118.2372665345591,-118.2372665345591],"lat":[33.74139429666072,33.74139429666072,33.65807620093077,33.65807620093077,33.6164171530658,33.6164171530658,33.57475810520083,33.57475810520083,33.6164171530658,33.6164171530658,33.57475810520083,33.57475810520083,33.65807620093077,33.65807620093077,33.69973524879575,33.69973524879575,33.74139429666072]}],[{"lng":[-117.6956989123144,-117.6956989123144,-117.6540398644494,-117.6540398644494,-117.6956989123144],"lat":[33.44978096160591,33.40812191374094,33.40812191374094,33.44978096160591,33.44978096160591]}],[{"lng":[-117.6540398644494,-117.6540398644494,-117.6123808165845,-117.6123808165845,-117.6540398644494],"lat":[33.40812191374094,33.36646286587597,33.36646286587597,33.40812191374094,33.40812191374094]}],[{"lng":[-118.5288798696139,-118.5288798696139,-118.4872208217489,-118.4872208217489,-118.5288798696139],"lat":[33.36646286587597,33.32480381801099,33.32480381801099,33.36646286587597,33.36646286587597]}],[{"lng":[-117.6123808165845,-117.6123808165845,-117.5707217687195,-117.5707217687195,-117.6123808165845],"lat":[33.36646286587597,33.32480381801099,33.32480381801099,33.36646286587597,33.36646286587597]}],[{"lng":[-119.6953332098331,-119.6953332098331,-119.6536741619681,-119.6536741619681,-119.5703560662382,-119.5703560662382,-119.4453789226433,-119.4453789226433,-119.3620608269133,-119.3620608269133,-119.4037198747783,-119.4037198747783,-119.6953332098331],"lat":[33.32480381801099,33.28314477014602,33.28314477014602,33.24148572228105,33.24148572228105,33.28314477014602,33.28314477014602,33.19982667441607,33.19982667441607,33.28314477014602,33.28314477014602,33.32480381801099,33.32480381801099]}],[{"lng":[-117.5707217687195,-117.5707217687195,-117.5290627208545,-117.5290627208545,-117.4874036729896,-117.4874036729896,-117.4457446251246,-117.4457446251246,-117.4874036729896,-117.4874036729896,-117.5707217687195],"lat":[33.32480381801099,33.28314477014602,33.28314477014602,33.24148572228105,33.24148572228105,33.19982667441607,33.19982667441607,33.28314477014602,33.28314477014602,33.32480381801099,33.32480381801099]}],[{"lng":[-119.3204017790484,-119.3204017790484,-119.2787427311834,-119.2787427311834,-119.3204017790484],"lat":[33.24148572228105,33.19982667441607,33.19982667441607,33.24148572228105,33.24148572228105]}],[{"lng":[-117.4457446251246,-117.4457446251246,-117.4040855772596,-117.4040855772596,-117.4457446251246],"lat":[33.19982667441607,33.1581676265511,33.1581676265511,33.19982667441607,33.19982667441607]}],[{"lng":[-117.3624265293946,-117.3624265293946,-117.3207674815297,-117.3207674815297,-117.3624265293946],"lat":[33.11650857868613,33.07484953082115,33.07484953082115,33.11650857868613,33.11650857868613]}],[{"lng":[-118.6538570132088,-118.6538570132088,-118.6121979653438,-118.6121979653438,-118.6538570132088],"lat":[33.07484953082115,33.03319048295619,33.03319048295619,33.07484953082115,33.07484953082115]}],[{"lng":[-117.3207674815297,-117.3207674815297,-117.2791084336647,-117.2791084336647,-117.3207674815297],"lat":[33.03319048295619,32.94987238722624,32.94987238722624,33.03319048295619,33.03319048295619]}],[{"lng":[-118.6121979653438,-118.6121979653438,-118.5705389174788,-118.5705389174788,-118.6121979653438],"lat":[32.99153143509121,32.94987238722624,32.94987238722624,32.99153143509121,32.99153143509121]}],[{"lng":[-118.5705389174788,-118.5705389174788,-118.5288798696139,-118.5288798696139,-118.5705389174788],"lat":[32.94987238722624,32.90821333936127,32.90821333936127,32.94987238722624,32.94987238722624]}],[{"lng":[-118.5288798696139,-118.5288798696139,-118.4872208217489,-118.4872208217489,-118.5288798696139],"lat":[32.8665542914963,32.82489524363132,32.82489524363132,32.8665542914963,32.8665542914963]}],[{"lng":[-117.3207674815297,-117.3207674815297,-117.2791084336647,-117.2791084336647,-117.3207674815297],"lat":[32.8665542914963,32.69991810003641,32.69991810003641,32.8665542914963,32.8665542914963]}],[{"lng":[-117.2791084336647,-117.2791084336647,-117.1541312900698,-117.1541312900698,-117.2374493857997,-117.2374493857997,-117.2791084336647],"lat":[32.69991810003641,32.53328190857651,32.53328190857651,32.65825905217143,32.65825905217143,32.69991810003641,32.69991810003641]}],[{"lng":[-119.3204017790484,-119.3204017790484,-119.2787427311834,-119.2787427311834,-119.3204017790484],"lat":[32.61660000430646,32.57494095644149,32.57494095644149,32.61660000430646,32.61660000430646]}],[{"lng":[-119.1954246354534,-119.1954246354534,-119.1537655875885,-119.1537655875885,-119.1954246354534],"lat":[32.49162286071154,32.44996381284657,32.44996381284657,32.49162286071154,32.49162286071154]}],[{"lng":[-119.1121065397235,-119.1121065397235,-119.0704474918585,-119.0704474918585,-119.1121065397235],"lat":[32.44996381284657,32.40830476498159,32.40830476498159,32.44996381284657,32.44996381284657]}]],[[{"lng":[-122.6531256082461,-122.6531256082461,-122.6114665603812,-122.6114665603812,-122.6531256082461],"lat":[48.6136743844559,48.57201533659094,48.57201533659094,48.6136743844559,48.6136743844559]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5281484646512,-122.5281484646512,-122.6114665603812],"lat":[48.53035628872596,48.48869724086099,48.48869724086099,48.53035628872596,48.53035628872596]}],[{"lng":[-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7360780014948],"lat":[47.98878866648132,47.94712961861634,47.94712961861634,47.98878866648132,47.98878866648132]}],[{"lng":[-124.6944189536298,-124.6944189536298,-124.6527599057648,-124.6527599057648,-124.6944189536298],"lat":[47.94712961861634,47.90547057075138,47.90547057075138,47.94712961861634,47.94712961861634]}],[{"lng":[-122.5698075125162,-122.5698075125162,-122.5281484646512,-122.5281484646512,-122.5698075125162],"lat":[47.94712961861634,47.90547057075138,47.90547057075138,47.94712961861634,47.94712961861634]}],[{"lng":[-124.7777370493597,-124.7777370493597,-124.7360780014948,-124.7360780014948,-124.7777370493597],"lat":[47.73883437929148,47.69717533142651,47.69717533142651,47.73883437929148,47.73883437929148]}],[{"lng":[-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.6111008578999,-124.6111008578999,-124.6527599057648,-124.6527599057648,-124.7360780014948],"lat":[47.69717533142651,47.65551628356154,47.65551628356154,47.53053913996662,47.53053913996662,47.61385723569657,47.61385723569657,47.69717533142651,47.69717533142651]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.6114665603812],"lat":[47.69717533142651,47.65551628356154,47.65551628356154,47.69717533142651,47.69717533142651]}],[{"lng":[-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213],"lat":[47.69717533142651,47.65551628356154,47.65551628356154,47.69717533142651,47.69717533142651]}],[{"lng":[-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.402805618575],"lat":[47.48888009210165,47.44722104423668,47.44722104423668,47.48888009210165,47.48888009210165]}],[{"lng":[-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451],"lat":[47.32224390064176,47.28058485277679,47.28058485277679,47.32224390064176,47.32224390064176]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.6114665603812],"lat":[47.23892580491182,47.19726675704684,47.19726675704684,47.23892580491182,47.23892580491182]}],[{"lng":[-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151],"lat":[47.1139486613169,47.07228961345192,47.07228961345192,47.1139486613169,47.1139486613169]}],[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[46.98897151772198,46.94731246985701,46.94731246985701,46.98897151772198,46.98897151772198]}],[{"lng":[-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852],"lat":[46.94731246985701,46.90565342199204,46.90565342199204,46.94731246985701,46.94731246985701]}],[{"lng":[-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552],"lat":[46.69735818266717,46.6556991348022,46.6556991348022,46.69735818266717,46.69735818266717]}],[{"lng":[-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852],"lat":[46.6556991348022,46.61404008693723,46.61404008693723,46.6556991348022,46.6556991348022]}],[{"lng":[-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202],"lat":[46.61404008693723,46.48906294334231,46.48906294334231,46.61404008693723,46.61404008693723]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.9445560920603,-123.9445560920603,-124.0278741877902],"lat":[46.61404008693723,46.57238103907225,46.57238103907225,46.61404008693723,46.61404008693723]}],[{"lng":[-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-123.9862151399253],"lat":[46.53072199120728,46.48906294334231,46.48906294334231,46.53072199120728,46.53072199120728]}],[{"lng":[-124.6527599057648,-124.6527599057648,-124.6111008578999,-124.6111008578999,-124.5694418100349,-124.5694418100349,-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-123.9445560920603,-123.9445560920603,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.1528513313852,-124.1528513313852,-124.2361694271151,-124.2361694271151,-124.2778284749801,-124.2778284749801,-124.1945103792501,-124.1945103792501,-124.2778284749801,-124.2778284749801,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.4861237143049,-124.4861237143049,-124.5277827621699,-124.5277827621699,-124.6527599057648],"lat":[47.48888009210165,47.44722104423668,47.44722104423668,47.32224390064176,47.32224390064176,47.15560770918187,47.15560770918187,47.03063056558695,47.03063056558695,46.98897151772198,46.98897151772198,46.90565342199204,46.90565342199204,46.73901723053214,46.73901723053214,46.6556991348022,46.6556991348022,46.36408579974739,46.36408579974739,46.28076770401745,46.28076770401745,46.23910865615247,46.23910865615247,46.28076770401745,46.28076770401745,46.32242675188242,46.32242675188242,46.36408579974739,46.36408579974739,46.44740389547734,46.44740389547734,46.48906294334231,46.48906294334231,46.53072199120728,46.53072199120728,46.57238103907225,46.57238103907225,46.61404008693723,46.61404008693723,46.6556991348022,46.6556991348022,46.78067627839712,46.78067627839712,46.82233532626209,46.82233532626209,46.86399437412706,46.86399437412706,46.90565342199204,46.90565342199204,46.94731246985701,46.94731246985701,47.03063056558695,47.03063056558695,47.07228961345192,47.07228961345192,47.1139486613169,47.1139486613169,47.15560770918187,47.15560770918187,47.19726675704684,47.19726675704684,47.23892580491182,47.23892580491182,47.28058485277679,47.28058485277679,47.32224390064176,47.32224390064176,47.36390294850673,47.36390294850673,47.4055619963717,47.4055619963717,47.44722104423668,47.44722104423668,47.48888009210165,47.48888009210165]},{"lng":[-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451],"lat":[46.98897151772198,46.94731246985701,46.94731246985701,46.98897151772198,46.98897151772198]}],[{"lng":[-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202],"lat":[46.44740389547734,46.40574484761237,46.40574484761237,46.44740389547734,46.44740389547734]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0278741877902],"lat":[46.44740389547734,46.40574484761237,46.40574484761237,46.44740389547734,46.44740389547734]}],[{"lng":[-123.6946018048705,-123.6946018048705,-123.6529427570055,-123.6529427570055,-123.6946018048705],"lat":[46.28076770401745,46.23910865615247,46.23910865615247,46.28076770401745,46.28076770401745]}]]],["X1","X2","X3","X4","X5"],"oyster_regions_vec",{"interactive":true,"className":"","pane":"tmap401","stroke":true,"color":"#666666","weight":1,"opacity":1,"fill":true,"fillColor":["#BEBADA","#FFFFB3","#8DD3C7","#FB8072","#80B1D3"],"fillOpacity":[1,1,1,1,1],"dashArray":"none","smoothFactor":1,"noClip":false},["<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>1<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Oregon<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>2<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Northern California<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>3<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Central California<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>4<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Southern California<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>5<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Washington<\/nobr><\/td><\/tr><\/table><\/div>"],null,["1","2","3","4","5"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#8DD3C7","#FFFFB3","#BEBADA","#FB8072","#80B1D3"],"labels":["Central California","Northern California","Oregon","Southern California","Washington"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"unknown","title":"EEZ","extra":null,"layerId":"legend401","className":"info legend oyster_regions_vec","group":"oyster_regions_vec"}]},{"method":"addLayersControl","args":[["Esri.WorldGrayCanvas","OpenStreetMap","Esri.WorldTopoMap"],"oyster_regions_vec",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]}],"limits":{"lat":[32.40830476498159,48.6136743844559],"lng":[-124.7777370493597,-117.1541312900698]},"fitBounds":[32.40830476498159,-124.7777370493597,48.6136743844559,-117.1541312900698,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n\t\t\t\t\t\tfunction(el, x) {\n\t\t\t\t\t\t\tvar tldiv = el.getElementsByClassName(\"leaflet-top leaflet-left\")[0];\n\t\t\t\t\t\t\tvar titlediv = document.createElement('div');\n\t\t\t\t\t\t\ttitlediv.className = \"info legend leaflet-control\";\n\t\t\t\t\t\t\ttitlediv.innerHTML = \"<b>Suitable Areas for Oyster Farming along the West Coast of the USA by EEZ<\/b>\";\n\t\t\t\t\t\t\ttldiv.insertBefore(titlediv, tldiv.childNodes[0]);\n\t\t\t\t\t\t}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To calculate and rank the regions by suitable area for oysters</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">cellSize</span>(oyster_regions, <span class="at">unit =</span> <span class="st">"m"</span>)  <span class="co"># Cell area in square meters</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>area_by_value <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Empty list to store results</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each region value and calculate total area</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (value <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  mask_r <span class="ot">&lt;-</span> oyster_regions <span class="sc">==</span> value</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  total_area <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">values</span>(areas <span class="sc">*</span> mask_r), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  area_by_value[[<span class="fu">as.character</span>(value)]] <span class="ot">&lt;-</span> total_area</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>calculated_areas <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">unlist</span>(area_by_value) <span class="sc">/</span> <span class="fl">1e6</span>) <span class="co">#convert to sq.km</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">SN =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(region_names),</span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">Region =</span> region_names,</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Total_Area_km2 =</span> calculated_areas,</span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> results_df[<span class="fu">order</span>(<span class="sc">-</span>results_df<span class="sc">$</span>Total_Area_km2), ] <span class="co"># Sort the results by Total_Area in descending order</span></span>
+<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>results_df<span class="sc">$</span>SN <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(results_df) <span class="co"># Reassign serial numbers after sorting</span></span>
+<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results_df)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"Exclusive Economic Zones"</span></span>
+<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results_df)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"Total Area (sq. km)"</span> <span class="co"># Rename columns for better readability</span></span>
+<span id="cb43-28"><a href="#cb43-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-29"><a href="#cb43-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table</span></span>
+<span id="cb43-30"><a href="#cb43-30" aria-hidden="true" tabindex="-1"></a>results_df <span class="sc">%&gt;%</span></span>
+<span id="cb43-31"><a href="#cb43-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb43-32"><a href="#cb43-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"html"</span>, </span>
+<span id="cb43-33"><a href="#cb43-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Ranked EEZ for Oyster Farming Along the West Coast of the USA based on Suitable Area(sq. km)"</span>, </span>
+<span id="cb43-34"><a href="#cb43-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb43-35"><a href="#cb43-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-36"><a href="#cb43-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">"striped"</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small" data-quarto-postprocess="true">
+<caption>Ranked EEZ for Oyster Farming Along the West Coast of the USA based on Suitable Area(sq. km)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">SN</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Exclusive Economic Zones</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Total Area (sq. km)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Central California</td>
+<td style="text-align: right;">4070</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Southern California</td>
+<td style="text-align: right;">3508</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Washington</td>
+<td style="text-align: right;">2378</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Oregon</td>
+<td style="text-align: right;">1074</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Northern California</td>
+<td style="text-align: right;">178</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="suitability-analysis-for-pacific-geoduck-panopea-generosa" class="level3">
+<h3 class="anchored" data-anchor-id="suitability-analysis-for-pacific-geoduck-panopea-generosa">Suitability Analysis for Pacific Geoduck (<strong>Panopea generosa</strong>):</h3>
+<p>Suitable Conditions:<br>
+Depth Range: 0 - 110 mbsl<br>
+Temperate Range: 8.3 - 12.8 degree Celsius</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reclassify SST and Depth for oyster suitability</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>sst_geoduck <span class="ot">&lt;-</span> <span class="fu">classify</span>(avg_sst, <span class="at">rcl =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">8.3</span>, <span class="dv">0</span>, <span class="fl">8.3</span>, <span class="fl">12.8</span>, <span class="dv">1</span>, <span class="fl">12.8</span>, <span class="cn">Inf</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>depth_geoduck <span class="ot">&lt;-</span> <span class="fu">classify</span>(depth, <span class="at">rcl =</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="sc">-</span><span class="dv">110</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">110</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>, <span class="cn">Inf</span>, <span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">byrow =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine the layers using map algebra</span></span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>suitability_geoduck <span class="ot">&lt;-</span> sst_geoduck <span class="sc">*</span> depth_geoduck</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(suitability_geoduck, <span class="at">main =</span> <span class="st">"Suitability Map for Pacific Geoduck"</span>) <span class="co"># Plot for visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HW4_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assign regions to suitable areas using EEC raster</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>geoduck_regions <span class="ot">&lt;-</span> suitability_geoduck <span class="sc">*</span> eec_raster</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(geoduck_regions, , <span class="at">main =</span> <span class="st">"Suitable Areas for Pacific Geoduck by Region ID"</span>) <span class="co"># Plot for visualization</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="HW4_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert raster to polygons</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>geoduck_regions_vec <span class="ot">&lt;-</span> <span class="fu">as.polygons</span>(geoduck_regions) <span class="sc">%&gt;%</span> <span class="fu">st_as_sf</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To remove the polygons representing water and add columns with names of the regions</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>geoduck_regions_vec <span class="ot">&lt;-</span> geoduck_regions_vec <span class="sc">%&gt;%</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(avg_sst <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region =</span> region_names)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the map</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"view"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>tmap mode set to interactive viewing</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(geoduck_regions_vec) <span class="sc">+</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"region"</span>,</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"EEZ"</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(</span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Suitable Areas for Pacific Geoduck Farming along the West Coast of the USA by EEZ"</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_view</span>(<span class="at">view.legend.position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"bottom"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-3cb1f916362bb3e71efb" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-3cb1f916362bb3e71efb">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"createMapPane","args":["tmap401",401]},{"method":"addProviderTiles","args":["Esri.WorldGrayCanvas",null,"Esri.WorldGrayCanvas",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap",null,"OpenStreetMap",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldTopoMap",null,"Esri.WorldTopoMap",{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addPolygons","args":[[[[{"lng":[-123.9445560920603,-123.9445560920603,-123.6529427570055,-123.6529427570055,-123.9445560920603],"lat":[46.23910865615247,46.1974496082875,46.1974496082875,46.23910865615247,46.23910865615247]}],[{"lng":[-124.8610551450897,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7777370493597,-124.7777370493597,-124.8610551450897,-124.8610551450897,-124.9027141929547,-124.9027141929547,-124.8610551450897,-124.8610551450897],"lat":[44.23947435863379,44.23947435863379,44.19781531076882,44.19781531076882,44.15615626290385,44.15615626290385,44.11449721503887,44.11449721503887,44.07283816717391,44.07283816717391,43.98952007144396,43.98952007144396,43.94786102357899,43.94786102357899,44.07283816717391,44.07283816717391,44.23947435863379]}],[{"lng":[-124.3194875228451,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-123.9862151399253,-123.9862151399253,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0278741877902,-124.0278741877902,-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0278741877902,-124.0278741877902,-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.0695332356552,-124.0695332356552,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.2361694271151,-124.2361694271151,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.5277827621699,-124.5277827621699,-124.5694418100349,-124.5694418100349,-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.4861237143049,-124.4861237143049,-124.5277827621699,-124.5277827621699,-124.5694418100349,-124.5694418100349,-124.6111008578999,-124.6111008578999,-124.6944189536298,-124.6944189536298,-124.6527599057648,-124.6527599057648,-124.6111008578999,-124.6111008578999,-124.6527599057648,-124.6527599057648,-124.6944189536298,-124.6944189536298,-124.6527599057648,-124.6527599057648,-124.6111008578999,-124.6111008578999,-124.5694418100349,-124.5694418100349,-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.5277827621699,-124.5277827621699,-124.5694418100349,-124.5694418100349,-124.6111008578999,-124.6111008578999,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.6111008578999,-124.6111008578999,-124.5694418100349,-124.5694418100349,-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.2778284749801,-124.2778284749801,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.3194875228451,-124.3194875228451],"lat":[46.23910865615247,46.23910865615247,46.1974496082875,46.1974496082875,46.15579056042253,46.15579056042253,46.07247246469258,46.07247246469258,46.03081341682761,46.03081341682761,45.98915436896264,45.98915436896264,45.94749532109767,45.94749532109767,45.86417722536772,45.86417722536772,45.73920008177281,45.73920008177281,45.69754103390783,45.69754103390783,45.65588198604286,45.65588198604286,45.61422293817789,45.61422293817789,45.53090484244794,45.53090484244794,45.36426865098805,45.36426865098805,45.32260960312308,45.32260960312308,45.28095055525811,45.28095055525811,45.23929150739313,45.23929150739313,45.19763245952817,45.19763245952817,45.15597341166319,45.15597341166319,45.11431436379821,45.11431436379821,45.03099626806827,45.03099626806827,44.9893372202033,44.9893372202033,44.94767817233833,44.94767817233833,44.90601912447335,44.90601912447335,44.78104198087843,44.78104198087843,44.69772388514849,44.69772388514849,44.65606483728352,44.65606483728352,44.61440578941855,44.61440578941855,44.57274674155357,44.57274674155357,44.5310876936886,44.5310876936886,44.48942864582363,44.48942864582363,44.36445150222871,44.36445150222871,44.28113340649877,44.28113340649877,44.11449721503887,44.11449721503887,44.07283816717391,44.07283816717391,44.03117911930893,44.03117911930893,43.90620197571401,43.90620197571401,43.86454292784904,43.86454292784904,43.82288387998407,43.82288387998407,43.57292959279423,43.57292959279423,43.53127054492926,43.53127054492926,43.48961149706429,43.48961149706429,43.40629340133435,43.40629340133435,43.36463435346937,43.36463435346937,43.28131625773943,43.28131625773943,43.23965720987445,43.23965720987445,43.19799816200948,43.19799816200948,43.03136197054959,43.03136197054959,42.8647257790897,42.8647257790897,42.82306673122473,42.82306673122473,42.73974863549478,42.73974863549478,42.65643053976484,42.65643053976484,42.61477149189987,42.61477149189987,42.48979434830495,42.48979434830495,42.23984006111511,42.23984006111511,42.19818101325014,42.19818101325014,42.07320386965522,42.07320386965522,42.03154482179025,42.03154482179025,41.98988577392528,41.98988577392528,42.28149910898009,42.28149910898009,42.32315815684505,42.32315815684505,42.36481720471003,42.36481720471003,42.406476252575,42.406476252575,42.44813530043997,42.44813530043997,42.53145339616992,42.53145339616992,42.69808958762981,42.69808958762981,42.78140768335975,42.78140768335975,42.94804387481965,42.94804387481965,42.98970292268461,42.98970292268461,43.23965720987445,43.23965720987445,43.36463435346937,43.36463435346937,43.40629340133435,43.40629340133435,43.48961149706429,43.48961149706429,43.53127054492926,43.53127054492926,43.73956578425413,43.73956578425413,43.78122483211909,43.78122483211909,43.82288387998407,43.82288387998407,43.86454292784904,43.86454292784904,43.90620197571401,43.90620197571401,43.98952007144396,43.98952007144396,44.03117911930893,44.03117911930893,44.11449721503887,44.11449721503887,44.15615626290385,44.15615626290385,44.11449721503887,44.11449721503887,44.15615626290385,44.15615626290385,44.23947435863379,44.23947435863379,44.32279245436374,44.32279245436374,44.36445150222871,44.36445150222871,44.40611055009369,44.40611055009369,44.48942864582363,44.48942864582363,44.57274674155357,44.57274674155357,44.65606483728352,44.65606483728352,44.69772388514849,44.69772388514849,44.73938293301347,44.73938293301347,44.78104198087843,44.78104198087843,44.82270102874341,44.82270102874341,44.86436007660838,44.86436007660838,45.07265531593325,45.07265531593325,45.61422293817789,45.61422293817789,45.86417722536772,45.86417722536772,45.98915436896264,45.98915436896264,46.03081341682761,46.03081341682761,46.15579056042253,46.15579056042253,46.1974496082875,46.1974496082875,46.23910865615247]}]],[[{"lng":[-124.4861237143049,-124.2361694271151,-124.2361694271151,-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451,-124.3194875228451,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.3194875228451,-124.3194875228451,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2778284749801,-124.2778284749801,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.5694418100349,-124.5694418100349,-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.3194875228451,-124.3194875228451,-124.2778284749801,-124.2778284749801,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.4861237143049,-124.4861237143049],"lat":[41.98988577392528,41.98988577392528,41.82324958246539,41.82324958246539,41.78159053460041,41.78159053460041,41.73993148673544,41.73993148673544,41.65661339100549,41.65661339100549,41.61495434314052,41.61495434314052,41.57329529527555,41.57329529527555,41.53163624741058,41.53163624741058,41.48997719954561,41.48997719954561,41.40665910381566,41.40665910381566,41.36500005595069,41.36500005595069,41.24002291235577,41.24002291235577,41.1983638644908,41.1983638644908,41.15670481662583,41.15670481662583,41.11504576876085,41.11504576876085,41.07338672089588,41.07338672089588,41.03172767303091,41.03172767303091,40.99006862516594,40.99006862516594,40.94840957730096,40.94840957730096,40.82343243370605,40.82343243370605,40.7401143379761,40.7401143379761,40.69845529011113,40.69845529011113,40.65679624224616,40.65679624224616,40.61513719438118,40.61513719438118,40.57347814651621,40.57347814651621,40.53181909865124,40.53181909865124,40.36518290719135,40.36518290719135,40.24020576359644,40.24020576359644,40.19854671573146,40.19854671573146,40.15688766786649,40.15688766786649,40.11522862000152,40.11522862000152,40.15688766786649,40.15688766786649,40.19854671573146,40.19854671573146,40.32352385932638,40.32352385932638,40.40684195505632,40.40684195505632,40.57347814651621,40.57347814651621,40.53181909865124,40.53181909865124,40.7401143379761,40.7401143379761,40.78177338584108,40.78177338584108,40.82343243370605,40.82343243370605,40.94840957730096,40.94840957730096,41.11504576876085,41.11504576876085,41.15670481662583,41.15670481662583,41.32334100808572,41.32334100808572,41.40665910381566,41.40665910381566,41.82324958246539,41.82324958246539,41.86490863033036,41.86490863033036,41.98988577392528]}],[{"lng":[-124.1945103792501,-124.1945103792501,-124.1528513313852,-124.1528513313852,-124.1945103792501],"lat":[40.11522862000152,40.07356957213654,40.07356957213654,40.11522862000152,40.11522862000152]}],[{"lng":[-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-123.9862151399253,-123.9862151399253,-123.9445560920603,-123.9445560920603,-123.9028970441953,-123.9028970441953,-123.8612379963303,-123.8612379963303,-123.8195789484654,-123.8195789484654,-123.7779199006004,-123.7779199006004,-123.8195789484654,-123.8195789484654,-123.8612379963303,-123.8612379963303,-123.9028970441953,-123.9028970441953,-123.9862151399253,-123.9862151399253,-124.0278741877902,-124.0278741877902,-124.1111922835202,-124.1111922835202,-124.1528513313852],"lat":[40.07356957213654,39.94859242854162,39.94859242854162,39.90693338067665,39.90693338067665,39.86527433281168,39.86527433281168,39.8236152849467,39.8236152849467,39.78195623708173,39.78195623708173,39.65697909348682,39.65697909348682,39.5320019498919,39.5320019498919,39.61532004562184,39.61532004562184,39.65697909348682,39.65697909348682,39.74029718921676,39.74029718921676,39.8236152849467,39.8236152849467,39.90693338067665,39.90693338067665,39.94859242854162,39.94859242854162,39.9902514764066,39.9902514764066,40.07356957213654,40.07356957213654]}],[{"lng":[-123.9028970441953,-123.9028970441953,-123.8612379963303,-123.8612379963303,-123.8195789484654,-123.8195789484654,-123.8612379963303,-123.8612379963303,-123.9028970441953],"lat":[39.5320019498919,39.32370671056704,39.32370671056704,39.36536575843201,39.36536575843201,39.40702480629698,39.40702480629698,39.5320019498919,39.5320019498919]}],[{"lng":[-123.8612379963303,-123.8612379963303,-123.8195789484654,-123.8195789484654,-123.8612379963303],"lat":[39.32370671056704,39.19872956697212,39.19872956697212,39.32370671056704,39.32370671056704]}],[{"lng":[-123.8195789484654,-123.7779199006004,-123.7779199006004,-123.7362608527354,-123.7362608527354,-123.6946018048705,-123.6946018048705,-123.7362608527354,-123.7362608527354,-123.6946018048705,-123.6946018048705,-123.6529427570055,-123.6529427570055,-123.6112837091405,-123.6112837091405,-123.5279656134106,-123.5279656134106,-123.4863065655456,-123.4863065655456,-123.4446475176806,-123.4446475176806,-123.4029884698157,-123.4029884698157,-123.3613294219507,-123.3613294219507,-123.3196703740857,-123.3196703740857,-123.2363522783558,-123.2363522783558,-123.1530341826258,-123.1530341826258,-123.1113751347608,-123.1113751347608,-123.0697160868959,-123.0697160868959,-123.3196703740857,-123.3196703740857,-123.3613294219507,-123.3613294219507,-123.4446475176806,-123.4446475176806,-123.4863065655456,-123.4863065655456,-123.5279656134106,-123.5279656134106,-123.5696246612755,-123.5696246612755,-123.6112837091405,-123.6112837091405,-123.6946018048705,-123.6946018048705,-123.7362608527354,-123.7362608527354,-123.7779199006004,-123.7779199006004,-123.8195789484654,-123.8195789484654,-123.8612379963303,-123.8612379963303,-123.8195789484654,-123.8195789484654,-123.8612379963303,-123.8612379963303,-123.8195789484654,-123.8195789484654],"lat":[39.19872956697212,39.19872956697212,39.11541147124218,39.11541147124218,39.03209337551223,39.03209337551223,38.99043432764726,38.99043432764726,38.90711623191731,38.90711623191731,38.86545718405234,38.86545718405234,38.82379813618736,38.82379813618736,38.7821390883224,38.7821390883224,38.74048004045742,38.74048004045742,38.69882099259245,38.69882099259245,38.65716194472748,38.65716194472748,38.6155028968625,38.6155028968625,38.57384384899753,38.57384384899753,38.53218480113256,38.53218480113256,38.49052575326758,38.49052575326758,38.44886670540262,38.44886670540262,38.3238895618077,38.3238895618077,38.28223051394272,38.28223051394272,38.44886670540262,38.44886670540262,38.49052575326758,38.49052575326758,38.53218480113256,38.53218480113256,38.57384384899753,38.57384384899753,38.6155028968625,38.6155028968625,38.65716194472748,38.65716194472748,38.74048004045742,38.74048004045742,38.7821390883224,38.7821390883224,38.82379813618736,38.82379813618736,38.86545718405234,38.86545718405234,38.90711623191731,38.90711623191731,38.94877527978228,38.94877527978228,38.99043432764726,38.99043432764726,39.15707051910714,39.15707051910714,39.19872956697212]}]],[[{"lng":[-123.3613294219507,-123.3613294219507,-123.3196703740857,-123.3196703740857,-123.3613294219507],"lat":[37.90729908315797,37.865640035293,37.865640035293,37.90729908315797,37.90729908315797]}],[{"lng":[-122.2365351295964,-122.2365351295964,-122.1948760817315,-122.1948760817315,-122.2365351295964],"lat":[37.69900384383311,37.61568574810316,37.61568574810316,37.69900384383311,37.69900384383311]}],[{"lng":[-123.2780113262207,-123.0280570390309,-123.0280570390309,-122.9863979911659,-122.9863979911659,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-123.0280570390309,-123.0280570390309,-122.944738943301,-122.944738943301,-122.861420847571,-122.861420847571,-122.7781027518411,-122.7781027518411,-122.7364437039761,-122.7364437039761,-122.6531256082461,-122.6531256082461,-122.5698075125162,-122.5698075125162,-122.4864894167863,-122.4864894167863,-122.5281484646512,-122.5281484646512,-122.5698075125162,-122.5698075125162,-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213,-122.4448303689213,-122.3615122731913,-122.3615122731913,-122.2781941774614,-122.2781941774614,-122.1948760817315,-122.1948760817315,-122.1532170338665,-122.1532170338665,-121.8616036988117,-121.8616036988117,-121.8199446509467,-121.8199446509467,-121.8616036988117,-121.8616036988117,-121.8199446509467,-121.8199446509467,-121.9032627466766,-121.9032627466766,-121.9865808424066,-121.9865808424066,-121.9032627466766,-121.9032627466766,-121.9865808424066,-121.9865808424066,-122.1532170338665,-122.1532170338665,-122.1948760817315,-122.1948760817315,-122.2781941774614,-122.2781941774614,-122.3198532253264,-122.3198532253264,-122.3615122731913,-122.3615122731913,-122.4864894167863,-122.4864894167863,-122.5281484646512,-122.5281484646512,-122.5698075125162,-122.5698075125162,-122.6114665603812,-122.6114665603812,-122.6531256082461,-122.6531256082461,-122.6947846561111,-122.6947846561111,-122.7364437039761,-122.7364437039761,-122.7781027518411,-122.7781027518411,-122.819761799706,-122.819761799706,-122.861420847571,-122.861420847571,-122.903079895436,-122.903079895436,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-123.0280570390309,-123.0280570390309,-123.0697160868959,-123.0697160868959,-123.1530341826258,-123.1530341826258,-123.1946932304908,-123.1946932304908,-123.2780113262207,-123.2780113262207,-123.3196703740857,-123.3196703740857,-123.4446475176806,-123.4446475176806,-123.4863065655456,-123.4863065655456,-123.4029884698157,-123.4029884698157,-123.3613294219507,-123.3613294219507,-123.2363522783558,-123.2363522783558,-123.1946932304908,-123.1946932304908,-123.2363522783558,-123.2363522783558,-123.2780113262207,-123.2780113262207],"lat":[38.28223051394272,38.28223051394272,38.24057146607775,38.24057146607775,38.1572533703478,38.1572533703478,38.11559432248283,38.11559432248283,38.03227622675288,38.03227622675288,37.99061717888792,37.99061717888792,38.03227622675288,38.03227622675288,37.99061717888792,37.99061717888792,37.94895813102294,37.94895813102294,37.90729908315797,37.90729908315797,37.865640035293,37.865640035293,37.82398098742802,37.82398098742802,37.78232193956305,37.78232193956305,37.57402670023819,37.57402670023819,37.49070860450824,37.49070860450824,37.32407241304836,37.32407241304836,37.28241336518338,37.28241336518338,37.15743622158847,37.15743622158847,37.11577717372349,37.11577717372349,37.03245907799355,37.03245907799355,36.99080003012858,36.99080003012858,36.9491409822636,36.9491409822636,36.86582288653366,36.86582288653366,36.74084574293874,36.74084574293874,36.69918669507376,36.69918669507376,36.65752764720879,36.65752764720879,36.61586859934382,36.61586859934382,36.74084574293874,36.74084574293874,36.78250479080371,36.78250479080371,36.82416383866868,36.82416383866868,36.86582288653366,36.86582288653366,36.90748193439863,36.90748193439863,36.9491409822636,36.9491409822636,36.99080003012858,36.99080003012858,37.03245907799355,37.03245907799355,37.07411812585852,37.07411812585852,37.11577717372349,37.11577717372349,37.07411812585852,37.07411812585852,37.11577717372349,37.11577717372349,37.19909526945344,37.19909526945344,37.24075431731841,37.24075431731841,37.28241336518338,37.28241336518338,37.36573146091332,37.36573146091332,37.44904955664327,37.44904955664327,37.49070860450824,37.49070860450824,37.53236765237322,37.53236765237322,37.57402670023819,37.57402670023819,37.61568574810316,37.61568574810316,37.65734479596814,37.65734479596814,37.69900384383311,37.69900384383311,37.74066289169808,37.74066289169808,37.78232193956305,37.78232193956305,37.90729908315797,37.90729908315797,37.94895813102294,37.94895813102294,37.99061717888792,37.99061717888792,38.07393527461786,38.07393527461786,38.03227622675288,38.03227622675288,37.99061717888792,37.99061717888792,38.07393527461786,38.07393527461786,38.11559432248283,38.11559432248283,38.19891241821278,38.19891241821278,38.28223051394272]},{"lng":[-121.9865808424066,-121.9865808424066,-121.9449217945416,-121.9449217945416,-121.9865808424066],"lat":[36.86582288653366,36.82416383866868,36.82416383866868,36.86582288653366,36.86582288653366]},{"lng":[-121.9032627466766,-121.9032627466766,-121.8616036988117,-121.8616036988117,-121.9032627466766],"lat":[36.82416383866868,36.78250479080371,36.78250479080371,36.82416383866868,36.82416383866868]}],[{"lng":[-122.0282398902716,-122.0282398902716,-121.9865808424066,-121.9865808424066,-122.0282398902716],"lat":[36.61586859934382,36.57420955147885,36.57420955147885,36.61586859934382,36.61586859934382]}],[{"lng":[-121.9865808424066,-121.9865808424066,-121.9449217945416,-121.9449217945416,-121.9865808424066],"lat":[36.57420955147885,36.53255050361388,36.53255050361388,36.57420955147885,36.57420955147885]}],[{"lng":[-121.9865808424066,-121.9449217945416,-121.9449217945416,-121.9032627466766,-121.9032627466766,-121.8616036988117,-121.8616036988117,-121.9865808424066,-121.9865808424066,-122.0282398902716,-122.0282398902716,-121.9865808424066,-121.9865808424066],"lat":[36.40757336001896,36.40757336001896,36.36591431215399,36.36591431215399,36.28259621642404,36.28259621642404,36.24093716855907,36.24093716855907,36.28259621642404,36.28259621642404,36.32425526428901,36.32425526428901,36.40757336001896]}],[{"lng":[-121.8616036988117,-121.8616036988117,-121.7782856030817,-121.7782856030817,-121.8616036988117],"lat":[36.24093716855907,36.1992781206941,36.1992781206941,36.24093716855907,36.24093716855907]}],[{"lng":[-121.6949675073518,-121.6949675073518,-121.6533084594868,-121.6533084594868,-121.6949675073518],"lat":[36.15761907282912,36.11596002496415,36.11596002496415,36.15761907282912,36.15761907282912]}],[{"lng":[-121.6116494116218,-121.6116494116218,-121.5699903637569,-121.5699903637569,-121.6116494116218],"lat":[36.0326419292342,35.99098288136923,35.99098288136923,36.0326419292342,36.0326419292342]}],[{"lng":[-121.5283313158919,-121.5283313158919,-121.4866722680269,-121.4866722680269,-121.5283313158919],"lat":[35.99098288136923,35.90766478563929,35.90766478563929,35.99098288136923,35.99098288136923]}],[{"lng":[-121.4866722680269,-121.4866722680269,-121.4450132201619,-121.4450132201619,-121.403354172297,-121.403354172297,-121.4866722680269],"lat":[35.86600573777432,35.78268764204437,35.78268764204437,35.82434668990935,35.82434668990935,35.86600573777432,35.86600573777432]}],[{"lng":[-121.403354172297,-121.361695124432,-121.361695124432,-121.320036076567,-121.320036076567,-121.2783770287021,-121.2783770287021,-121.1950589329721,-121.1950589329721,-121.2783770287021,-121.2783770287021,-121.320036076567,-121.320036076567,-121.403354172297,-121.403354172297,-121.4450132201619,-121.4450132201619,-121.403354172297,-121.403354172297],"lat":[35.82434668990935,35.82434668990935,35.78268764204437,35.78268764204437,35.69936954631443,35.69936954631443,35.65771049844945,35.65771049844945,35.57439240271951,35.57439240271951,35.61605145058448,35.61605145058448,35.65771049844945,35.65771049844945,35.7410285941794,35.7410285941794,35.78268764204437,35.78268764204437,35.82434668990935]}],[{"lng":[-121.1950589329721,-121.1950589329721,-121.1533998851071,-121.1533998851071,-121.1117408372422,-121.1117408372422,-121.0284227415122,-121.0284227415122,-121.0700817893772,-121.0700817893772,-121.1117408372422,-121.1117408372422,-121.1950589329721],"lat":[35.57439240271951,35.53273335485454,35.53273335485454,35.49107430698956,35.49107430698956,35.44941525912459,35.44941525912459,35.49107430698956,35.49107430698956,35.53273335485454,35.53273335485454,35.57439240271951,35.57439240271951]}],[{"lng":[-121.0284227415122,-121.0284227415122,-120.9867636936472,-120.9867636936472,-120.9451046457823,-120.9451046457823,-120.9034455979173,-120.9034455979173,-120.8617865500523,-120.8617865500523,-120.8201275021874,-120.8201275021874,-120.7784684543224,-120.7784684543224,-120.6534913107275,-120.6534913107275,-120.6951503585924,-120.6951503585924,-120.7784684543224,-120.7784684543224,-120.8617865500523,-120.8617865500523,-120.9034455979173,-120.9034455979173,-120.8617865500523,-120.8617865500523,-120.9034455979173,-120.9034455979173,-121.0284227415122],"lat":[35.44941525912459,35.36609716339465,35.36609716339465,35.24112001979973,35.24112001979973,35.19946097193476,35.19946097193476,35.15780192406979,35.15780192406979,35.11614287620481,35.11614287620481,34.90784763687995,34.90784763687995,34.94950668474492,34.94950668474492,35.11614287620481,35.11614287620481,35.15780192406979,35.15780192406979,35.19946097193476,35.19946097193476,35.24112001979973,35.24112001979973,35.28277906766471,35.28277906766471,35.32443811552967,35.32443811552967,35.44941525912459,35.44941525912459]}]],[[{"lng":[-120.7784684543224,-120.6951503585924,-120.6951503585924,-120.6534913107275,-120.6534913107275,-120.6118322628625,-120.6118322628625,-120.6534913107275,-120.6534913107275,-120.6118322628625,-120.6118322628625,-120.6534913107275,-120.6534913107275,-120.6118322628625,-120.6118322628625,-120.6951503585924,-120.6951503585924,-120.7368094064574,-120.7368094064574,-120.6951503585924,-120.6951503585924,-120.7368094064574,-120.7368094064574,-120.7784684543224,-120.7784684543224],"lat":[34.94950668474492,34.94950668474492,34.90784763687995,34.90784763687995,34.86618858901497,34.86618858901497,34.78287049328503,34.78287049328503,34.65789334969011,34.65789334969011,34.61623430182514,34.61623430182514,34.57457525396017,34.57457525396017,34.53291620609519,34.53291620609519,34.57457525396017,34.57457525396017,34.65789334969011,34.65789334969011,34.69955239755509,34.69955239755509,34.74121144542006,34.74121144542006,34.94950668474492]}],[{"lng":[-120.6118322628625,-120.6118322628625,-120.5285141671326,-120.5285141671326,-120.4868551192676,-120.4868551192676,-120.6118322628625],"lat":[34.53291620609519,34.49125715823023,34.49125715823023,34.44959811036525,34.44959811036525,34.53291620609519,34.53291620609519]}]],[[{"lng":[-123.1113751347608,-123.1113751347608,-123.0697160868959,-123.0697160868959,-123.1113751347608],"lat":[48.98860581524066,48.94694676737569,48.94694676737569,48.98860581524066,48.98860581524066]}],[{"lng":[-123.0280570390309,-122.819761799706,-122.819761799706,-122.7781027518411,-122.7781027518411,-122.819761799706,-122.819761799706,-122.7781027518411,-122.7781027518411,-122.7364437039761,-122.7364437039761,-122.6947846561111,-122.6947846561111,-122.7364437039761,-122.7364437039761,-122.6531256082461,-122.6531256082461,-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.5281484646512,-122.5281484646512,-122.6947846561111,-122.6947846561111,-122.7364437039761,-122.7364437039761,-122.7781027518411,-122.7781027518411,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-123.0280570390309,-123.0280570390309,-123.1113751347608,-123.1113751347608,-123.1946932304908,-123.1946932304908,-123.1530341826258,-123.1530341826258,-123.0697160868959,-123.0697160868959,-123.0280570390309,-123.0280570390309,-122.861420847571,-122.861420847571,-122.903079895436,-122.903079895436,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-123.0280570390309,-123.0280570390309],"lat":[48.98860581524066,48.98860581524066,48.94694676737569,48.94694676737569,48.90528771951072,48.90528771951072,48.86362867164574,48.86362867164574,48.82196962378077,48.82196962378077,48.7803105759158,48.7803105759158,48.73865152805082,48.73865152805082,48.69699248018586,48.69699248018586,48.65533343232088,48.65533343232088,48.69699248018586,48.69699248018586,48.6136743844559,48.6136743844559,48.57201533659094,48.57201533659094,48.6136743844559,48.6136743844559,48.65533343232088,48.65533343232088,48.69699248018586,48.69699248018586,48.73865152805082,48.73865152805082,48.69699248018586,48.69699248018586,48.65533343232088,48.65533343232088,48.6136743844559,48.6136743844559,48.65533343232088,48.65533343232088,48.69699248018586,48.69699248018586,48.73865152805082,48.73865152805082,48.7803105759158,48.7803105759158,48.82196962378077,48.82196962378077,48.86362867164574,48.86362867164574,48.90528771951072,48.90528771951072,48.94694676737569,48.94694676737569,48.98860581524066]},{"lng":[-122.861420847571,-122.861420847571,-122.819761799706,-122.819761799706,-122.861420847571],"lat":[48.7803105759158,48.73865152805082,48.73865152805082,48.7803105759158,48.7803105759158]}],[{"lng":[-123.0280570390309,-123.0280570390309,-122.9863979911659,-122.9863979911659,-123.0280570390309],"lat":[48.6136743844559,48.57201533659094,48.57201533659094,48.6136743844559,48.6136743844559]}],[{"lng":[-123.1946932304908,-123.1946932304908,-123.1530341826258,-123.1530341826258,-123.1946932304908],"lat":[48.57201533659094,48.53035628872596,48.53035628872596,48.57201533659094,48.57201533659094]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5281484646512,-122.5281484646512,-122.6114665603812],"lat":[48.53035628872596,48.48869724086099,48.48869724086099,48.53035628872596,48.53035628872596]}],[{"lng":[-125.0276913365496,-125.0276913365496,-124.9443732408196,-124.9443732408196,-125.0276913365496],"lat":[48.48869724086099,48.44703819299602,48.44703819299602,48.48869724086099,48.48869724086099]}],[{"lng":[-125.1110094322795,-125.1110094322795,-125.0693503844145,-125.0693503844145,-125.1110094322795],"lat":[48.44703819299602,48.40537914513104,48.40537914513104,48.44703819299602,48.44703819299602]}],[{"lng":[-124.6527599057648,-124.6527599057648,-124.5277827621699,-124.5277827621699,-124.6527599057648],"lat":[48.40537914513104,48.36372009726608,48.36372009726608,48.40537914513104,48.40537914513104]}],[{"lng":[-123.1113751347608,-123.0697160868959,-123.0697160868959,-123.1530341826258,-123.1530341826258,-123.1113751347608,-123.1113751347608],"lat":[48.44703819299602,48.44703819299602,48.36372009726608,48.36372009726608,48.40537914513104,48.40537914513104,48.44703819299602]}],[{"lng":[-124.5277827621699,-124.5277827621699,-124.402805618575,-124.402805618575,-124.5277827621699],"lat":[48.36372009726608,48.3220610494011,48.3220610494011,48.36372009726608,48.36372009726608]}],[{"lng":[-123.0697160868959,-123.0697160868959,-123.0280570390309,-123.0280570390309,-123.0697160868959],"lat":[48.36372009726608,48.3220610494011,48.3220610494011,48.36372009726608,48.36372009726608]}],[{"lng":[-122.5698075125162,-122.5698075125162,-122.4864894167863,-122.4864894167863,-122.5698075125162],"lat":[48.36372009726608,48.3220610494011,48.3220610494011,48.36372009726608,48.36372009726608]}],[{"lng":[-124.402805618575,-124.402805618575,-124.3194875228451,-124.3194875228451,-124.402805618575],"lat":[48.3220610494011,48.28040200153613,48.28040200153613,48.3220610494011,48.3220610494011]}],[{"lng":[-123.1946932304908,-123.1530341826258,-123.1530341826258,-123.0697160868959,-123.0697160868959,-123.1113751347608,-123.1113751347608,-123.1530341826258,-123.1530341826258,-123.2363522783558,-123.2363522783558,-123.1946932304908,-123.1946932304908],"lat":[48.36372009726608,48.36372009726608,48.3220610494011,48.3220610494011,48.28040200153613,48.28040200153613,48.23874295367116,48.23874295367116,48.28040200153613,48.28040200153613,48.3220610494011,48.3220610494011,48.36372009726608]}],[{"lng":[-125.3609637194694,-125.3193046716044,-125.3193046716044,-125.2776456237394,-125.2776456237394,-125.3193046716044,-125.3193046716044,-125.3609637194694,-125.3609637194694,-125.4026227673343,-125.4026227673343,-125.3609637194694,-125.3609637194694],"lat":[48.3220610494011,48.3220610494011,48.28040200153613,48.28040200153613,48.23874295367116,48.23874295367116,48.19708390580618,48.19708390580618,48.15542485794121,48.15542485794121,48.28040200153613,48.28040200153613,48.3220610494011]}],[{"lng":[-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151],"lat":[48.28040200153613,48.23874295367116,48.23874295367116,48.28040200153613,48.28040200153613]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.5279656134106,-123.5279656134106,-123.4863065655456,-123.4863065655456,-123.9862151399253,-123.9862151399253,-124.0278741877902],"lat":[48.23874295367116,48.15542485794121,48.15542485794121,48.11376581007624,48.11376581007624,48.19708390580618,48.19708390580618,48.23874295367116,48.23874295367116]}],[{"lng":[-123.1946932304908,-123.1946932304908,-123.1530341826258,-123.1530341826258,-123.1946932304908],"lat":[48.19708390580618,48.15542485794121,48.15542485794121,48.19708390580618,48.19708390580618]}],[{"lng":[-122.4031713210563,-122.4031713210563,-122.3615122731913,-122.3615122731913,-122.4031713210563],"lat":[48.19708390580618,48.15542485794121,48.15542485794121,48.19708390580618,48.19708390580618]}],[{"lng":[-123.3613294219507,-123.2780113262207,-123.2780113262207,-123.2363522783558,-123.2363522783558,-123.1946932304908,-123.1946932304908,-123.4446475176806,-123.4446475176806,-123.4029884698157,-123.4029884698157,-123.3196703740857,-123.3196703740857,-123.3613294219507,-123.3613294219507],"lat":[48.28040200153613,48.28040200153613,48.19708390580618,48.19708390580618,48.15542485794121,48.15542485794121,48.11376581007624,48.11376581007624,48.15542485794121,48.15542485794121,48.19708390580618,48.19708390580618,48.23874295367116,48.23874295367116,48.28040200153613]}],[{"lng":[-122.861420847571,-122.861420847571,-122.819761799706,-122.819761799706,-122.7781027518411,-122.7781027518411,-122.861420847571,-122.861420847571,-122.819761799706,-122.819761799706,-122.903079895436,-122.903079895436,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-122.944738943301,-122.944738943301,-122.9863979911659,-122.9863979911659,-123.0280570390309,-123.0280570390309,-123.1113751347608,-123.1113751347608,-122.944738943301,-122.944738943301,-122.903079895436,-122.903079895436,-122.861420847571,-122.861420847571,-122.7781027518411,-122.7781027518411,-122.7364437039761,-122.7364437039761,-122.6947846561111,-122.6947846561111,-122.6531256082461,-122.6531256082461,-122.6114665603812,-122.6114665603812,-122.6947846561111,-122.6947846561111,-122.7781027518411,-122.7781027518411,-122.7364437039761,-122.7364437039761,-122.6947846561111,-122.6947846561111,-122.6531256082461,-122.6531256082461,-122.6947846561111,-122.6947846561111,-122.6531256082461,-122.6531256082461,-122.7364437039761,-122.7364437039761,-122.861420847571],"lat":[48.6136743844559,48.53035628872596,48.53035628872596,48.57201533659094,48.57201533659094,48.48869724086099,48.48869724086099,48.44703819299602,48.44703819299602,48.40537914513104,48.40537914513104,48.44703819299602,48.44703819299602,48.53035628872596,48.53035628872596,48.40537914513104,48.40537914513104,48.3220610494011,48.3220610494011,48.28040200153613,48.28040200153613,48.23874295367116,48.23874295367116,48.11376581007624,48.11376581007624,48.15542485794121,48.15542485794121,48.07210676221126,48.07210676221126,48.15542485794121,48.15542485794121,48.07210676221126,48.07210676221126,48.11376581007624,48.11376581007624,48.03044771434629,48.03044771434629,48.11376581007624,48.11376581007624,48.15542485794121,48.15542485794121,48.19708390580618,48.19708390580618,48.23874295367116,48.23874295367116,48.3220610494011,48.3220610494011,48.36372009726608,48.36372009726608,48.40537914513104,48.40537914513104,48.48869724086099,48.48869724086099,48.53035628872596,48.53035628872596,48.6136743844559,48.6136743844559]},{"lng":[-122.944738943301,-122.944738943301,-123.0280570390309,-123.0280570390309,-122.903079895436,-122.903079895436,-122.944738943301],"lat":[48.28040200153613,48.23874295367116,48.23874295367116,48.19708390580618,48.19708390580618,48.28040200153613,48.28040200153613]}],[{"lng":[-122.5698075125162,-122.5698075125162,-122.5281484646512,-122.5281484646512,-122.5698075125162],"lat":[48.19708390580618,48.07210676221126,48.07210676221126,48.19708390580618,48.19708390580618]}],[{"lng":[-122.4031713210563,-122.4031713210563,-122.3615122731913,-122.3615122731913,-122.4031713210563],"lat":[48.11376581007624,48.07210676221126,48.07210676221126,48.11376581007624,48.11376581007624]}],[{"lng":[-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213],"lat":[48.07210676221126,48.03044771434629,48.03044771434629,48.07210676221126,48.07210676221126]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.6114665603812],"lat":[48.03044771434629,47.98878866648132,47.98878866648132,48.03044771434629,48.03044771434629]}],[{"lng":[-122.6531256082461,-122.6531256082461,-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.5281484646512,-122.5281484646512,-122.5698075125162,-122.5698075125162,-122.6114665603812,-122.6114665603812,-122.6531256082461],"lat":[47.98878866648132,47.90547057075138,47.90547057075138,47.8638115228864,47.8638115228864,47.90547057075138,47.90547057075138,47.98878866648132,47.98878866648132,47.94712961861634,47.94712961861634,47.98878866648132,47.98878866648132]}],[{"lng":[-122.4864894167863,-122.4864894167863,-122.4448303689213,-122.4448303689213,-122.4864894167863],"lat":[47.94712961861634,47.90547057075138,47.90547057075138,47.94712961861634,47.94712961861634]}],[{"lng":[-122.5281484646512,-122.5281484646512,-122.4864894167863,-122.4864894167863,-122.5281484646512],"lat":[47.90547057075138,47.8638115228864,47.8638115228864,47.90547057075138,47.90547057075138]}],[{"lng":[-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213],"lat":[47.90547057075138,47.8638115228864,47.8638115228864,47.90547057075138,47.90547057075138]}],[{"lng":[-122.5281484646512,-122.5281484646512,-122.4864894167863,-122.4864894167863,-122.5281484646512],"lat":[47.73883437929148,47.69717533142651,47.69717533142651,47.73883437929148,47.73883437929148]}],[{"lng":[-122.4031713210563,-122.4031713210563,-122.3615122731913,-122.3615122731913,-122.4031713210563],"lat":[47.73883437929148,47.69717533142651,47.69717533142651,47.73883437929148,47.73883437929148]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.6114665603812],"lat":[47.69717533142651,47.65551628356154,47.65551628356154,47.69717533142651,47.69717533142651]}],[{"lng":[-122.4448303689213,-122.4448303689213,-122.4031713210563,-122.4031713210563,-122.4448303689213],"lat":[47.69717533142651,47.65551628356154,47.65551628356154,47.69717533142651,47.69717533142651]}],[{"lng":[-122.5281484646512,-122.5281484646512,-122.4864894167863,-122.4864894167863,-122.5281484646512],"lat":[47.5721981878316,47.53053913996662,47.53053913996662,47.5721981878316,47.5721981878316]}],[{"lng":[-122.6114665603812,-122.6114665603812,-122.5698075125162,-122.5698075125162,-122.6114665603812],"lat":[47.23892580491182,47.19726675704684,47.19726675704684,47.23892580491182,47.23892580491182]}],[{"lng":[-122.819761799706,-122.819761799706,-122.7781027518411,-122.7781027518411,-122.819761799706],"lat":[47.19726675704684,47.15560770918187,47.15560770918187,47.19726675704684,47.19726675704684]}],[{"lng":[-124.1111922835202,-124.1111922835202,-124.0278741877902,-124.0278741877902,-124.0695332356552,-124.0695332356552,-124.1111922835202],"lat":[47.03063056558695,46.94731246985701,46.94731246985701,46.98897151772198,46.98897151772198,47.03063056558695,47.03063056558695]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.9445560920603,-123.9445560920603,-124.0278741877902],"lat":[46.61404008693723,46.57238103907225,46.57238103907225,46.61404008693723,46.61404008693723]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.9445560920603,-123.9445560920603,-124.0278741877902],"lat":[46.53072199120728,46.48906294334231,46.48906294334231,46.53072199120728,46.53072199120728]}],[{"lng":[-124.7777370493597,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7777370493597,-124.7777370493597,-124.6944189536298,-124.6944189536298,-124.6527599057648,-124.6527599057648,-124.5694418100349,-124.5694418100349,-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.44446466644,-124.44446466644,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.36114657071,-124.36114657071,-124.2778284749801,-124.2778284749801,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.2361694271151,-124.2361694271151,-124.1945103792501,-124.1945103792501,-124.1111922835202,-124.1111922835202,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.0278741877902,-124.0278741877902,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-124.1528513313852,-124.1528513313852,-124.1111922835202,-124.1111922835202,-124.0695332356552,-124.0695332356552,-123.9445560920603,-123.9445560920603,-124.3194875228451,-124.3194875228451,-124.36114657071,-124.36114657071,-124.402805618575,-124.402805618575,-124.44446466644,-124.44446466644,-124.4861237143049,-124.4861237143049,-124.5277827621699,-124.5277827621699,-124.5694418100349,-124.5694418100349,-124.6111008578999,-124.6111008578999,-124.6527599057648,-124.6527599057648,-124.6944189536298,-124.6944189536298,-124.7360780014948,-124.7360780014948,-124.6944189536298,-124.6944189536298,-124.7360780014948,-124.7360780014948,-124.7777370493597,-124.7777370493597,-124.8193960972247,-124.8193960972247,-124.8610551450897,-124.8610551450897,-124.9027141929547,-124.9027141929547,-124.9443732408196,-124.9443732408196,-124.9860322886846,-124.9860322886846,-125.0276913365496,-125.0276913365496,-124.9860322886846,-124.9860322886846,-124.9443732408196,-124.9443732408196,-124.9027141929547,-124.9027141929547,-124.8610551450897,-124.8610551450897,-124.7777370493597,-124.7777370493597],"lat":[48.40537914513104,48.40537914513104,48.36372009726608,48.36372009726608,48.28040200153613,48.28040200153613,48.23874295367116,48.23874295367116,48.19708390580618,48.19708390580618,48.07210676221126,48.07210676221126,48.03044771434629,48.03044771434629,47.98878866648132,47.98878866648132,47.94712961861634,47.94712961861634,47.8638115228864,47.8638115228864,47.82215247502143,47.82215247502143,47.78049342715646,47.78049342715646,47.73883437929148,47.73883437929148,47.69717533142651,47.69717533142651,47.53053913996662,47.53053913996662,47.48888009210165,47.48888009210165,47.4055619963717,47.4055619963717,47.36390294850673,47.36390294850673,47.32224390064176,47.32224390064176,47.23892580491182,47.23892580491182,47.19726675704684,47.19726675704684,47.15560770918187,47.15560770918187,47.1139486613169,47.1139486613169,47.07228961345192,47.07228961345192,47.03063056558695,47.03063056558695,46.94731246985701,46.94731246985701,46.90565342199204,46.90565342199204,46.82233532626209,46.82233532626209,46.73901723053214,46.73901723053214,46.69735818266717,46.69735818266717,46.6556991348022,46.6556991348022,46.61404008693723,46.61404008693723,46.40574484761237,46.40574484761237,46.36408579974739,46.36408579974739,46.32242675188242,46.32242675188242,46.28076770401745,46.28076770401745,46.23910865615247,46.23910865615247,46.28076770401745,46.28076770401745,46.32242675188242,46.32242675188242,46.44740389547734,46.44740389547734,46.61404008693723,46.61404008693723,46.6556991348022,46.6556991348022,46.69735818266717,46.69735818266717,46.82233532626209,46.82233532626209,46.90565342199204,46.90565342199204,46.94731246985701,46.94731246985701,47.07228961345192,47.07228961345192,47.23892580491182,47.23892580491182,47.36390294850673,47.36390294850673,47.44722104423668,47.44722104423668,47.5721981878316,47.5721981878316,47.61385723569657,47.61385723569657,47.65551628356154,47.65551628356154,47.73883437929148,47.73883437929148,47.82215247502143,47.82215247502143,47.94712961861634,47.94712961861634,48.03044771434629,48.03044771434629,48.07210676221126,48.07210676221126,48.23874295367116,48.23874295367116,48.28040200153613,48.28040200153613,48.36372009726608,48.36372009726608,48.40537914513104]},{"lng":[-124.5277827621699,-124.5277827621699,-124.4861237143049,-124.4861237143049,-124.5277827621699],"lat":[46.98897151772198,46.94731246985701,46.94731246985701,46.98897151772198,46.98897151772198]}],[{"lng":[-124.0278741877902,-124.0278741877902,-123.9862151399253,-123.9862151399253,-124.0278741877902],"lat":[46.44740389547734,46.40574484761237,46.40574484761237,46.44740389547734,46.44740389547734]}],[{"lng":[-123.7779199006004,-123.7779199006004,-123.7362608527354,-123.7362608527354,-123.7779199006004],"lat":[46.28076770401745,46.23910865615247,46.23910865615247,46.28076770401745,46.28076770401745]}],[{"lng":[-123.6946018048705,-123.6946018048705,-123.6529427570055,-123.6529427570055,-123.6946018048705],"lat":[46.28076770401745,46.23910865615247,46.23910865615247,46.28076770401745,46.28076770401745]}]]],["X1","X2","X3","X4","X5"],"geoduck_regions_vec",{"interactive":true,"className":"","pane":"tmap401","stroke":true,"color":"#666666","weight":1,"opacity":1,"fill":true,"fillColor":["#BEBADA","#FFFFB3","#8DD3C7","#FB8072","#80B1D3"],"fillOpacity":[1,1,1,1,1],"dashArray":"none","smoothFactor":1,"noClip":false},["<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>1<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Oregon<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>2<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Northern California<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>3<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Central California<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>4<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Southern California<\/nobr><\/td><\/tr><\/table><\/div>","<style> div.leaflet-popup-content {width:auto !important;overflow-y:auto; overflow-x:hidden;}<\/style><div style=\"max-height:25em;padding-right:0px;\"><table>\n\t\t\t   <thead><tr><th colspan=\"2\"><b>5<\/b><\/th><\/thead><\/tr><tr><td style=\"color: #888888;\"><nobr>region<\/nobr><\/td><td align=\"right\"><nobr>Washington<\/nobr><\/td><\/tr><\/table><\/div>"],null,["1","2","3","4","5"],{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#8DD3C7","#FFFFB3","#BEBADA","#FB8072","#80B1D3"],"labels":["Central California","Northern California","Oregon","Southern California","Washington"],"na_color":null,"na_label":"NA","opacity":1,"position":"bottomright","type":"unknown","title":"EEZ","extra":null,"layerId":"legend401","className":"info legend geoduck_regions_vec","group":"geoduck_regions_vec"}]},{"method":"addLayersControl","args":[["Esri.WorldGrayCanvas","OpenStreetMap","Esri.WorldTopoMap"],"geoduck_regions_vec",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]}],"limits":{"lat":[34.44959811036525,48.98860581524066],"lng":[-125.4026227673343,-120.4868551192676]},"fitBounds":[34.44959811036525,-125.4026227673343,48.98860581524066,-120.4868551192676,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n\t\t\t\t\t\tfunction(el, x) {\n\t\t\t\t\t\t\tvar tldiv = el.getElementsByClassName(\"leaflet-top leaflet-left\")[0];\n\t\t\t\t\t\t\tvar titlediv = document.createElement('div');\n\t\t\t\t\t\t\ttitlediv.className = \"info legend leaflet-control\";\n\t\t\t\t\t\t\ttitlediv.innerHTML = \"<b>Suitable Areas for Pacific Geoduck Farming along the West Coast of the USA by EEZ<\/b>\";\n\t\t\t\t\t\t\ttldiv.insertBefore(titlediv, tldiv.childNodes[0]);\n\t\t\t\t\t\t}).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#To calculate and rank the regions by suitable area for oysters</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>areas <span class="ot">&lt;-</span> <span class="fu">cellSize</span>(geoduck_regions, <span class="at">unit =</span> <span class="st">"m"</span>)  <span class="co"># Cell area in square meters</span></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>area_by_value <span class="ot">&lt;-</span> <span class="fu">list</span>()  <span class="co"># Empty list to store results</span></span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each region value and calculate total area</span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (value <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>) {</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>  mask_r <span class="ot">&lt;-</span> oyster_regions <span class="sc">==</span> value</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>  total_area <span class="ot">&lt;-</span> <span class="fu">sum</span>(<span class="fu">values</span>(areas <span class="sc">*</span> mask_r), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>  area_by_value[[<span class="fu">as.character</span>(value)]] <span class="ot">&lt;-</span> total_area</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-13"><a href="#cb51-13" aria-hidden="true" tabindex="-1"></a>calculated_areas <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">unlist</span>(area_by_value) <span class="sc">/</span> <span class="fl">1e6</span>) <span class="co">#convert to sq.km</span></span>
+<span id="cb51-14"><a href="#cb51-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-15"><a href="#cb51-15" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb51-16"><a href="#cb51-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">SN =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(region_names),</span>
+<span id="cb51-17"><a href="#cb51-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">Region =</span> region_names,</span>
+<span id="cb51-18"><a href="#cb51-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Total_Area_km2 =</span> calculated_areas,</span>
+<span id="cb51-19"><a href="#cb51-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
+<span id="cb51-20"><a href="#cb51-20" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb51-21"><a href="#cb51-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-22"><a href="#cb51-22" aria-hidden="true" tabindex="-1"></a>results_df <span class="ot">&lt;-</span> results_df[<span class="fu">order</span>(<span class="sc">-</span>results_df<span class="sc">$</span>Total_Area_km2), ] <span class="co"># Sort the results by Total_Area in descending order</span></span>
+<span id="cb51-23"><a href="#cb51-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-24"><a href="#cb51-24" aria-hidden="true" tabindex="-1"></a>results_df<span class="sc">$</span>SN <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(results_df) <span class="co"># Reassign serial numbers after sorting</span></span>
+<span id="cb51-25"><a href="#cb51-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-26"><a href="#cb51-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results_df)[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"Exclusive Economic Zones"</span></span>
+<span id="cb51-27"><a href="#cb51-27" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results_df)[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"Total Area (sq. km)"</span> <span class="co"># Rename columns for better readability</span></span>
+<span id="cb51-28"><a href="#cb51-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-29"><a href="#cb51-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Create table</span></span>
+<span id="cb51-30"><a href="#cb51-30" aria-hidden="true" tabindex="-1"></a>results_df <span class="sc">%&gt;%</span></span>
+<span id="cb51-31"><a href="#cb51-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(</span>
+<span id="cb51-32"><a href="#cb51-32" aria-hidden="true" tabindex="-1"></a>    <span class="st">"html"</span>, </span>
+<span id="cb51-33"><a href="#cb51-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Ranked EEZ for Pacific Geoduck Farming Along the West Coast of the USA based on Suitable Area(sq. km)"</span>, </span>
+<span id="cb51-34"><a href="#cb51-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb51-35"><a href="#cb51-35" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb51-36"><a href="#cb51-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">"striped"</span>, <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="table table-striped caption-top table-sm small" data-quarto-postprocess="true">
+<caption>Ranked EEZ for Pacific Geoduck Farming Along the West Coast of the USA based on Suitable Area(sq. km)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">SN</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Exclusive Economic Zones</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Total Area (sq. km)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Central California</td>
+<td style="text-align: right;">4070</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Southern California</td>
+<td style="text-align: right;">3508</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Washington</td>
+<td style="text-align: right;">2378</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Oregon</td>
+<td style="text-align: right;">1074</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Northern California</td>
+<td style="text-align: right;">178</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</section>
+<section id="data-source" class="level3">
+<h3 class="anchored" data-anchor-id="data-source">Data Source:</h3>
+<ol type="1">
+<li>Sea Surface Temperature: <a href="https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php" class="uri">https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php</a></li>
+<li>Bathymetry: <a href="https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area" class="uri">https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area</a></li>
+<li>Exclusive Economic Zones:<br>
+<a href="https://www.marineregions.org/eez.php" class="uri">https://www.marineregions.org/eez.php</a></li>
+<li>Suitable Conditions for Sea Life: <a href="https://www.sealifebase.ca/search.php" class="uri">https://www.sealifebase.ca/search.php</a></li>
+</ol>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

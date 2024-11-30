@@ -1,0 +1,315 @@
+---
+title: "HW4"
+author: "Sanjay Poudel"
+format: html
+editor: visual
+editor_options: 
+  chunk_output_type: console
+---
+
+### Load Required Libraries and Files
+
+```{r}
+library("here")
+library("terra")
+library("sf")
+library("tmap")
+library("kableExtra")
+library("dplyr")
+```
+
+```{r}
+#load required files
+filepath <- here::here("data")
+
+depth <- rast(here::here("data", "depth.tif"))
+eec <- read_sf(here::here("data","wc_regions_clean.shp"))
+
+sst_files <- list.files(filepath, pattern = "annual.*\\.tif$", full.names = TRUE)
+
+sst <- rast(sst_files)
+```
+
+### Data Preprocessing
+
+```{r}
+#check the crs compatibility of depth and crs files and change if needed
+
+if (st_crs(depth) == st_crs(eec)) {
+  print("depth and eec files have the same coordinate system")
+} else {
+    eec <- st_transform(eec, crs = st_crs(depth))
+}
+```
+
+```{r}
+#check the crs compatibility of depth and sst files and change if needed
+
+if (crs(depth) == crs(sst)) {
+  print("depth and sst rasters have the save coordinate system")
+} else {
+    warning("Changing the CRS of sst file")
+    sst <- project(sst, crs(depth))
+}
+```
+
+```{r}
+#caclulate the average sst in celsius
+
+avg_sst <- mean(sst) - 273.15
+```
+
+```{r}
+#check the name of the raster
+
+names(avg_sst)
+```
+
+```{r}
+#rename the raster
+
+names(avg_sst) <- "avg_sst"
+```
+
+```{r}
+#check the extent of the depth and avg_sst raster
+
+print(ext(depth))
+print(ext(avg_sst))
+```
+
+```{r}
+#crop the depth raster to match the extent of the avg_sst raster
+
+depth <- crop(depth, avg_sst)
+```
+
+```{r}
+#check the resolution of the depth and avg_sst raster
+
+print(res(depth))
+print(res(avg_sst))
+```
+
+```{r}
+#resample the depth raster to match the resolution of the avg_sst raster
+
+depth <- resample(depth, avg_sst, method = "near")
+```
+
+```{r}
+#check if the depth and avg_sst rasters have matching extent and resolution by combining them
+
+combined_rast = c(depth, avg_sst)
+```
+
+```{r}
+#Rasterize the eec shp file
+
+eec_vect <- vect(eec)
+
+eec_raster <- rasterize(eec_vect, depth, field = "rgn_id")
+
+# Plot the result to confirm
+plot(eec_raster, main = "Rasterized EEC")
+```
+
+### Suitability Analysis for Oysters
+
+Suitable Conditions:\
+Temperature Range: 11 to 30 degree Celsius\
+Depth Range: 0 to 70 mbsl
+
+```{r}
+# Reclassify SST and Depth for oyster suitability
+
+sst_oyster <- classify(avg_sst, rcl = matrix(c(-Inf, 11, 0, 11, 30, 1, 30, Inf, 0), ncol = 3, byrow = TRUE))
+
+depth_oyster <- classify(depth, rcl = matrix(c(-Inf, -70, 0, -70, 0, 1, 0, Inf, 0), ncol = 3, byrow = TRUE))
+
+# Combine the layers to create a suitability map
+suitability_oyster <- sst_oyster * depth_oyster
+
+plot(suitability_oyster, main = "Suitability Map for Oysters") # Plot for visualization
+```
+
+```{r}
+# Assign regions to suitable areas using EEC raster
+
+oyster_regions <- suitability_oyster * eec_raster
+plot(oyster_regions, main = "Suitable Areas for Oysters by Region ID") # Plot for visualization
+```
+
+```{r}
+# Convert raster to polygons
+
+oyster_regions_vec <- as.polygons(oyster_regions) %>% st_as_sf() 
+```
+
+```{r}
+#To remove the polygons representing water and add columns with names of the regions
+
+region_names <- c("Oregon", "Northern California", "Central California", "Southern California", "Washington")
+
+oyster_regions_vec <- oyster_regions_vec %>%
+  filter(avg_sst != 0) %>%
+  mutate(region = region_names)
+```
+
+```{r}
+#Plot the map
+
+tmap_mode("view")
+
+tm_shape(oyster_regions_vec)+
+  tm_polygons(
+    col = "region",
+    title = "EEZ"
+  ) +
+  tm_layout(
+    title = "Suitable Areas for Oyster Farming along the West Coast of the USA by EEZ"
+  )+
+  tm_view(view.legend.position = c("right", "bottom"))
+```
+
+```{r}
+#To calculate and rank the regions by suitable area for oysters
+
+areas <- cellSize(oyster_regions, unit = "m")  # Cell area in square meters
+area_by_value <- list()  # Empty list to store results
+
+# Loop through each region value and calculate total area
+for (value in 1:5) {
+  mask_r <- oyster_regions == value
+  total_area <- sum(values(areas * mask_r), na.rm = TRUE)
+  area_by_value[[as.character(value)]] <- total_area
+}
+
+calculated_areas <- round(unlist(area_by_value) / 1e6) #convert to sq.km
+
+results_df <- data.frame(
+  SN = 1:length(region_names),
+  Region = region_names,
+  Total_Area_km2 = calculated_areas,
+  stringsAsFactors = FALSE
+)
+
+results_df <- results_df[order(-results_df$Total_Area_km2), ] # Sort the results by Total_Area in descending order
+
+results_df$SN <- 1:nrow(results_df) # Reassign serial numbers after sorting
+
+colnames(results_df)[2] <- "Exclusive Economic Zones"
+colnames(results_df)[3] <- "Total Area (sq. km)" # Rename columns for better readability
+
+# Create table
+results_df %>%
+  kable(
+    "html", 
+    caption = "Ranked EEZ for Oyster Farming Along the West Coast of the USA based on Suitable Area(sq. km)", 
+    row.names = FALSE
+  ) %>%
+  kable_styling("striped", full_width = FALSE)
+```
+
+### Suitability Analysis for Pacific Geoduck (**Panopea generosa**):
+
+Suitable Conditions:\
+Depth Range: 0 - 110 mbsl\
+Temperate Range: 8.3 - 12.8 degree Celsius
+
+```{r}
+# Reclassify SST and Depth for oyster suitability
+sst_geoduck <- classify(avg_sst, rcl = matrix(c(-Inf, 8.3, 0, 8.3, 12.8, 1, 12.8, Inf, 0), ncol = 3, byrow = TRUE))
+
+depth_geoduck <- classify(depth, rcl = matrix(c(-Inf, -110, 0, -110, 0, 1, 0, Inf, 0), ncol = 3, byrow = TRUE))
+
+# Combine the layers using map algebra
+suitability_geoduck <- sst_geoduck * depth_geoduck
+
+plot(suitability_geoduck, main = "Suitability Map for Pacific Geoduck") # Plot for visualization
+```
+
+```{r}
+# Assign regions to suitable areas using EEC raster
+
+geoduck_regions <- suitability_geoduck * eec_raster
+
+plot(geoduck_regions, , main = "Suitable Areas for Pacific Geoduck by Region ID") # Plot for visualization
+```
+
+```{r}
+# Convert raster to polygons
+
+geoduck_regions_vec <- as.polygons(geoduck_regions) %>% st_as_sf() 
+```
+
+```{r}
+#To remove the polygons representing water and add columns with names of the regions
+
+geoduck_regions_vec <- geoduck_regions_vec %>%
+  filter(avg_sst != 0) %>%
+  mutate(region = region_names)
+```
+
+```{r}
+#Plot the map
+
+tmap_mode("view")
+
+tm_shape(geoduck_regions_vec) +
+  tm_polygons(
+    col = "region",
+    title = "EEZ"
+  ) +
+  tm_layout(
+    title = "Suitable Areas for Pacific Geoduck Farming along the West Coast of the USA by EEZ"
+  )+
+  tm_view(view.legend.position = c("right", "bottom"))
+```
+
+```{r}
+#To calculate and rank the regions by suitable area for oysters
+
+areas <- cellSize(geoduck_regions, unit = "m")  # Cell area in square meters
+area_by_value <- list()  # Empty list to store results
+
+# Loop through each region value and calculate total area
+for (value in 1:5) {
+  mask_r <- oyster_regions == value
+  total_area <- sum(values(areas * mask_r), na.rm = TRUE)
+  area_by_value[[as.character(value)]] <- total_area
+}
+
+calculated_areas <- round(unlist(area_by_value) / 1e6) #convert to sq.km
+
+results_df <- data.frame(
+  SN = 1:length(region_names),
+  Region = region_names,
+  Total_Area_km2 = calculated_areas,
+  stringsAsFactors = FALSE
+)
+
+results_df <- results_df[order(-results_df$Total_Area_km2), ] # Sort the results by Total_Area in descending order
+
+results_df$SN <- 1:nrow(results_df) # Reassign serial numbers after sorting
+
+colnames(results_df)[2] <- "Exclusive Economic Zones"
+colnames(results_df)[3] <- "Total Area (sq. km)" # Rename columns for better readability
+
+# Create table
+results_df %>%
+  kable(
+    "html", 
+    caption = "Ranked EEZ for Pacific Geoduck Farming Along the West Coast of the USA based on Suitable Area(sq. km)", 
+    row.names = FALSE
+  ) %>%
+  kable_styling("striped", full_width = FALSE)
+```
+
+### Data Source:
+
+1.  Sea Surface Temperature: <https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php>
+2.  Bathymetry: <https://www.gebco.net/data_and_products/gridded_bathymetry_data/#area>
+3.  Exclusive Economic Zones:\
+    <https://www.marineregions.org/eez.php>
+4.  Suitable Conditions for Sea Life: <https://www.sealifebase.ca/search.php>
