@@ -120,198 +120,120 @@ eec_raster <- rasterize(eec_vect, depth, field = "rgn_id")
 plot(eec_raster, main = "Rasterized EEC")
 ```
 
-### Suitability Analysis for Oysters
-
-Suitable Conditions:\
-Temperature Range: 11 to 30 degree Celsius\
-Depth Range: 0 to 70 mbsl
-
 ```{r}
-# Reclassify SST and Depth for oyster suitability
-
-sst_oyster <- classify(avg_sst, rcl = matrix(c(-Inf, 11, 0, 11, 30, 1, 30, Inf, 0), ncol = 3, byrow = TRUE))
-
-depth_oyster <- classify(depth, rcl = matrix(c(-Inf, -70, 0, -70, 0, 1, 0, Inf, 0), ncol = 3, byrow = TRUE))
-
-# Combine the layers to create a suitability map
-suitability_oyster <- sst_oyster * depth_oyster
-
-plot(suitability_oyster, main = "Suitability Map for Oysters") # Plot for visualization
-```
-
-```{r}
-# Assign regions to suitable areas using EEC raster
-
-oyster_regions <- suitability_oyster * eec_raster
-plot(oyster_regions, main = "Suitable Areas for Oysters by Region ID") # Plot for visualization
-```
-
-```{r}
-# Convert raster to polygons
-
-oyster_regions_vec <- as.polygons(oyster_regions) %>% st_as_sf() 
-```
-
-```{r}
-#To remove the polygons representing water and add columns with names of the regions
-
-region_names <- c("Oregon", "Northern California", "Central California", "Southern California", "Washington")
-
-oyster_regions_vec <- oyster_regions_vec %>%
-  filter(avg_sst != 0) %>%
-  mutate(region = region_names)
-```
-
-```{r}
-#Plot the map
-
-tmap_mode("view")
-
-tm_shape(oyster_regions_vec)+
-  tm_polygons(
-    col = "region",
-    title = "EEZ"
-  ) +
-  tm_layout(
-    title = "Suitable Areas for Oyster Farming along the West Coast of the USA by EEZ"
-  )+
-  tm_view(view.legend.position = c("right", "bottom"))
-```
-
-```{r}
-#To calculate and rank the regions by suitable area for oysters
-
-areas <- cellSize(oyster_regions, unit = "m")  # Cell area in square meters
-area_by_value <- list()  # Empty list to store results
-
-# Loop through each region value and calculate total area
-for (value in 1:5) {
-  mask_r <- oyster_regions == value
-  total_area <- sum(values(areas * mask_r), na.rm = TRUE)
-  area_by_value[[as.character(value)]] <- total_area
+perform_suitability_analysis <- function(avg_sst, depth, eec_raster, temp_range, depth_range, region_names, species_name) {
+  
+  # Reclassify SST and Depth based on suitability conditions
+  sst_layer <- classify(avg_sst, rcl = matrix(
+    c(-Inf, temp_range[1], 0, temp_range[1], temp_range[2], 1, temp_range[2], Inf, 0), 
+    ncol = 3, byrow = TRUE
+  ))
+  
+  depth_layer <- classify(depth, rcl = matrix(
+    c(-Inf, -depth_range[2], 0, -depth_range[2], -depth_range[1], 1, -depth_range[1], Inf, 0), 
+    ncol = 3, byrow = TRUE
+  ))
+  
+  # Combine the layers to create a suitability map
+  suitability_layer <- sst_layer * depth_layer
+  
+  # Assign regions to suitable areas using EEZ raster
+  regions <- suitability_layer * eec_raster
+  
+  # Convert raster to polygons and add region names
+  regions_vec <- regions %>%
+    as.polygons() %>%
+    st_as_sf() %>%
+    filter(!is.na(avg_sst) & avg_sst != 0) %>%
+    mutate(region = region_names)
+  
+  # Calculate and rank the regions by suitable area
+  areas <- cellSize(regions, unit = "m")  # Cell area in square meters
+  area_by_value <- list()
+  
+  for (value in 1:length(region_names)) {
+    mask_r <- regions == value
+    total_area <- sum(values(areas * mask_r), na.rm = TRUE)
+    area_by_value[[as.character(value)]] <- total_area
+  }
+  
+  calculated_areas <- round(unlist(area_by_value) / 1e6)  # Convert to sq. km
+  
+  results_df <- data.frame(
+    SN = 1:length(region_names),
+    Region = region_names,
+    Total_Area_km2 = calculated_areas,
+    stringsAsFactors = FALSE
+  )
+  
+  results_df <- results_df[order(-results_df$Total_Area_km2), ]  # Sort by area
+  results_df$SN <- 1:nrow(results_df)  # Reassign serial numbers
+  
+  colnames(results_df)[2] <- "Exclusive Economic Zones"
+  colnames(results_df)[3] <- "Total Suitable Area (sq. km)"  # Rename columns
+  
+  # Create the map
+  tmap_mode("view")
+  map <- tm_shape(regions_vec) +
+    tm_polygons(
+      col = "region",
+      title = "EEZ"
+    ) +
+    tm_layout(
+      title = paste("Suitable Areas for", species_name, "Farming along the West Coast of the USA by EEZ")
+    ) +
+    tm_view(view.legend.position = c("right", "bottom"))
+  
+  # Print the map and return the table
+  #print(map)  # Ensure the map is rendered in the R console or R Markdown
+  
+  table_html <- results_df %>%
+    kable(
+      "html", 
+      caption = paste("Ranked EEZ for", species_name, "Farming Along the West Coast of the USA based on Suitable Area (sq. km)"), 
+      row.names = FALSE
+    ) %>%
+    kable_styling("striped", full_width = FALSE)
+  
+  # Return a list containing both the table and the map
+  return(list(
+    table = table_html,
+    map = map
+  ))
 }
+```
 
-calculated_areas <- round(unlist(area_by_value) / 1e6) #convert to sq.km
-
-results_df <- data.frame(
-  SN = 1:length(region_names),
-  Region = region_names,
-  Total_Area_km2 = calculated_areas,
-  stringsAsFactors = FALSE
+```{r}
+# For Oysters
+oyster_output <- perform_suitability_analysis(
+  avg_sst = avg_sst, 
+  depth = depth, 
+  eec_raster = eec_raster, 
+  temp_range = c(11, 30), 
+  depth_range = c(0, 70), 
+  region_names = c("Oregon", "Northern California", "Central California", "Southern California", "Washington"), 
+  species_name = "Oysters"
 )
 
-results_df <- results_df[order(-results_df$Total_Area_km2), ] # Sort the results by Total_Area in descending order
-
-results_df$SN <- 1:nrow(results_df) # Reassign serial numbers after sorting
-
-colnames(results_df)[2] <- "Exclusive Economic Zones"
-colnames(results_df)[3] <- "Total Suitable Area (sq. km)" # Rename columns for better readability
-
-# Create table
-results_df %>%
-  kable(
-    "html", 
-    caption = "Ranked EEZ for Oyster Farming Along the West Coast of the USA based on Suitable Area(sq. km)", 
-    row.names = FALSE
-  ) %>%
-  kable_styling("striped", full_width = FALSE)
-```
-
-### Suitability Analysis for Pacific Geoduck (**Panopea generosa**):
-
-Suitable Conditions:\
-Depth Range: 0 - 110 mbsl\
-Temperate Range: 8.3 - 12.8 degree Celsius
-
-```{r}
-# Reclassify SST and Depth for oyster suitability
-sst_geoduck <- classify(avg_sst, rcl = matrix(c(-Inf, 8.3, 0, 8.3, 12.8, 1, 12.8, Inf, 0), ncol = 3, byrow = TRUE))
-
-depth_geoduck <- classify(depth, rcl = matrix(c(-Inf, -110, 0, -110, 0, 1, 0, Inf, 0), ncol = 3, byrow = TRUE))
-
-# Combine the layers using map algebra
-suitability_geoduck <- sst_geoduck * depth_geoduck
-
-plot(suitability_geoduck, main = "Suitability Map for Pacific Geoduck") # Plot for visualization
+oyster_output$map
+oyster_output$table
 ```
 
 ```{r}
-# Assign regions to suitable areas using EEC raster
-
-geoduck_regions <- suitability_geoduck * eec_raster
-
-plot(geoduck_regions, , main = "Suitable Areas for Pacific Geoduck by Region ID") # Plot for visualization
-```
-
-```{r}
-# Convert raster to polygons
-
-geoduck_regions_vec <- as.polygons(geoduck_regions) %>% st_as_sf() 
-```
-
-```{r}
-#To remove the polygons representing water and add columns with names of the regions
-
-geoduck_regions_vec <- geoduck_regions_vec %>%
-  filter(avg_sst != 0) %>%
-  mutate(region = region_names)
-```
-
-```{r}
-#Plot the map
-
-tmap_mode("view")
-
-tm_shape(geoduck_regions_vec) +
-  tm_polygons(
-    col = "region",
-    title = "EEZ"
-  ) +
-  tm_layout(
-    title = "Suitable Areas for Pacific Geoduck Farming along the West Coast of the USA by EEZ"
-  )+
-  tm_view(view.legend.position = c("right", "bottom"))
-```
-
-```{r}
-#To calculate and rank the regions by suitable area for oysters
-
-areas <- cellSize(geoduck_regions, unit = "m")  # Cell area in square meters
-area_by_value <- list()  # Empty list to store results
-
-# Loop through each region value and calculate total area
-for (value in 1:5) {
-  mask_r <- oyster_regions == value
-  total_area <- sum(values(areas * mask_r), na.rm = TRUE)
-  area_by_value[[as.character(value)]] <- total_area
-}
-
-calculated_areas <- round(unlist(area_by_value) / 1e6) #convert to sq.km
-
-results_df <- data.frame(
-  SN = 1:length(region_names),
-  Region = region_names,
-  Total_Area_km2 = calculated_areas,
-  stringsAsFactors = FALSE
+# For Pacific Geoduck
+geoduck_output <- perform_suitability_analysis(
+  avg_sst = avg_sst, 
+  depth = depth, 
+  eec_raster = eec_raster, 
+  temp_range = c(8.3, 12.8), 
+  depth_range = c(0, 110), 
+  region_names = c("Oregon", "Northern California", "Central California", "Southern California", "Washington"), 
+  species_name = "Pacific Geoduck"
 )
 
-results_df <- results_df[order(-results_df$Total_Area_km2), ] # Sort the results by Total_Area in descending order
-
-results_df$SN <- 1:nrow(results_df) # Reassign serial numbers after sorting
-
-colnames(results_df)[2] <- "Exclusive Economic Zones"
-colnames(results_df)[3] <- "Total Suitable Area (sq. km)" # Rename columns for better readability
-
-# Create table
-results_df %>%
-  kable(
-    "html", 
-    caption = "Ranked EEZ for Pacific Geoduck Farming Along the West Coast of the USA based on Suitable Area(sq. km)", 
-    row.names = FALSE
-  ) %>%
-  kable_styling("striped", full_width = FALSE)
+geoduck_output$map
+geoduck_output$table
 ```
-
 ### Data Source:
 
 1.  Sea Surface Temperature: <https://coralreefwatch.noaa.gov/product/5km/index_5km_ssta.php>
